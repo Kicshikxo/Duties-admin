@@ -1,0 +1,428 @@
+@font-face {
+    font-family: 'CenturyGothic';
+
+    src: url('fonts/CenturyGothic.ttf');
+}
+
+:root {
+    --main-color: #47A19D; /* #47A19D */
+    --current-tab-color: #449094 /* #449094 */
+}
+
+* {
+    font-family: 'CenturyGothic';
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    border-collapse: collapse;
+
+    -webkit-user-select: none;
+    text-decoration: none;
+    text-align: center;
+
+    outline: none !important;
+	-webkit-tap-highlight-color: #0000;
+}
+
+button:active, button:focus {
+	outline: none !important;
+}
+
+body {
+	overflow: hidden;
+}
+
+#add-form {
+	position: fixed;
+	z-index: 100;
+	top: 15vh;
+	left: 27vw;
+
+	overflow-x: hidden;
+	overflow-y: auto;
+	transition: .5s cubic-bezier(.5,.35,.1,1) transform, .3s opacity;
+	transform: scale(0);
+
+	width: 46vw;
+	height: 70vh;
+	padding: 48px;
+	border: 1px solid var(--main-color);
+	border-radius: 4px;
+	background: #FFFE;
+}
+
+small {
+    font-size: .7em;
+
+    color: var(--main-color);
+}
+
+#header {
+    position: fixed;
+/*     z-index: 50; */
+    top: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 42px;
+	color: #FFF;
+	font-size: 24px;
+
+    transition: .3s height;
+
+    background: var(--main-color);
+    box-shadow: 0 0 10px 0 rgba(50, 50, 50, .75)
+}
+#main-block {
+    width: 80vw;
+    height: 100vh;
+    margin-left: 10vw;
+    padding-top: 10vh;
+
+    background: #FFF;
+	z-index: 75;
+    box-shadow: 0 0 10px 0 rgba(34, 60, 80, .2)}
+    #selectors-block {
+        display: flex;
+        justify-content: left;
+
+        width: 70vw;
+        height: 41px;
+        margin: 0 auto;
+
+        border: 1px solid var(--main-color)}
+        .selector {
+            font-size: 16px;
+
+            display: inline;
+
+            width: 120px;
+            height: 40px;
+
+            border: none;
+            border-right: 1px solid var(--main-color);
+            border-bottom: 1px solid var(--main-color);
+            background: #FFF;
+        }
+    #table-block {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+
+        width: 70vw;
+        margin: 0 auto}
+        #date-block {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: row;
+
+            width: 70vw;
+            height: 40px;
+
+            background: #FFF}
+            #date-title {
+                display: flex;
+
+                width: 121px;
+                min-width: 121px;
+                max-width: 121px;
+                height: 40px;
+
+                border: 1px solid var(--main-color);
+                border-top: none;
+            }
+            #date-table {
+                position: relative;
+                z-index: 20;
+
+                display: flex;
+                overflow: hidden;
+                justify-content: flex-start;
+                align-items: flex-start;
+
+                width: calc(70vw - 120px);
+                height: 40px;
+                margin: 0 auto;
+
+                border-right: 1px solid var(--main-color);
+                border-bottom: 1px solid var(--main-color)}
+                .date-cell {
+                    font-size: 16px;
+
+                    min-width: 90px;
+                    height: 40px;
+
+                    text-align: center;
+                    vertical-align: top;
+
+                    border-right: 1px solid var(--main-color);
+                    background: #FFF}
+                    .date-cell:last-child {
+                        border-right: none;
+        }
+        #rating-block {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: row;
+
+            width: 70vw;
+            height: 70vh;
+
+            order: 2}
+            #names-table {
+                z-index: 25;
+
+                display: block;
+                overflow: hidden;
+
+                width: 120px;
+                min-width: 120px;
+                max-width: 120px;
+                height: 70vh;
+
+                border: 1px solid var(--main-color);
+                border-top: none;
+                border-right: none;
+
+                order: 1}
+                .student-cell {
+                    font-size: 16px;
+                    text-align: left;
+
+                    width: 120px;
+                    width: 1vw;
+                    min-width: 120px;
+                    max-width: 120px;
+                    height: 48px;
+                    padding: 2px 4px;
+
+                    border-bottom: 1px solid var(--main-color);
+                    background: #FFF;
+            }
+            #rating-table {
+                position: relative;
+                z-index: 20;
+
+                display: block;
+                overflow: scroll;
+
+                width: calc(70vw - 120px);
+                height: 70vh;
+
+                cursor: move;
+
+                color: #000;
+                border: 1px solid var(--main-color);
+                border-top: none;
+                background: #FFF;
+
+                order: 2}
+                .mark {
+                    font-size: 28px;
+                    font-weight: bold;
+
+                    display: table-cell;
+
+                    width: 90px;
+                    min-width: 90px;
+                    max-width: 90px;
+                    height: 48px;
+                    padding: 2px 4px;
+
+                    text-align: center;
+
+                    border: 1px solid var(--main-color);
+                    border-top: none;
+                    border-left: none;
+                    background: #FFF}
+                    .mark2 {
+                        color: #D12828}
+                    .mark3 {
+                        color: #E5D32C}
+                    .mark4 {
+                        color: #ABE52C}
+                    .mark5 {
+                        color: #44E52C}
+                    .markH {
+                        color: #000}
+                    .marknull {
+                        color: #0000;
+    }
+    #open-fullscreen-block {
+        width: 70vw;
+        height: 5vh;
+        margin: 0 auto}
+        #open-fullscreen {
+            float: right;
+
+            width: 5vh;
+            height: 5vh;
+
+            cursor: pointer;
+            transition: .3s;
+
+            opacity: .3;
+            background: url(img/fullscreen-open.png);
+            background-size: cover}
+            #open-fullscreen:hover {
+                opacity: 1;
+    }
+    #close-fullscreen {
+        position: fixed;
+        z-index: 30;
+        right: 16px;
+        bottom: 16px;
+
+        display: none;
+
+        width: 6vh;
+        height: 6vh;
+
+        cursor: pointer;
+        transition: .3s;
+
+        opacity: .3;
+        background: url(img/fullscreen-close.png);
+        background-size: cover}
+        #close-fullscreen:hover {
+            opacity: 1;
+}
+@media (max-width: 1100px) {
+    #main-block {
+        width: 100vw;
+        margin-left: 0;
+    }
+    .group {
+        display: none;
+    }
+    #navigation-bar {
+        justify-content: center;
+        width: 80vw;
+        margin: 0 10vw 0 10vw;
+    }
+}
+@media (orientation: portrait) {
+	#add-form {
+		top: 12vh;
+		left: 7vw;
+
+		width: 86vw;
+		height: 70vh;
+		padding: 32px
+	}
+    #header {
+        justify-content: center;
+        align-items: flex-end}
+        #navigation-bar {
+            display: none;
+
+            width: 100vw;
+            height: 36px;
+            margin: 0}
+            .group {
+                display: none;
+        }
+        #mobile-navigation-bar {
+            display: block}
+            #down-arrow {
+                display: block;
+        }
+
+    #main-block {
+        width: 100vw;
+        margin-left: 0}
+        #selectors-block {
+            width: 90vw;
+            height: 27px}
+            .selector {
+                font-size: 10px;
+
+                width: 86px;
+                height: 26px;
+        }
+        #table-block {
+            width: 90vw;
+            height: 67vh}
+            #date-block {
+                width: 90vw;
+                height: 26px}
+                #date-title {
+                    font-size: 10px;
+
+                    width: 87px;
+                    min-width: 87px;
+                    max-width: 87px;
+                    height: 26px}
+                #date-table {
+                    width: 90vw;
+                    height: 26px}
+                    .date-cell {
+                        font-size: 10px;
+
+                        min-width: 60px;
+                        height: 26px;
+            }
+            #rating-block {
+                width: 90vw}
+                #names-table {
+                    min-width: 86px;
+                    max-width: 86px;
+                    height: calc(67vh - 26px)}
+                    .student-cell {
+                        font-size: 10px;
+
+                        width: 86px;
+                        min-width: 86px;
+                        max-width: 86px;
+                        height: 34px;
+                    }
+                #rating-table {
+                    width: 90vw;
+                    height: calc(67vh - 26px)}
+                    .mark {
+                        font-size: 20px;
+
+                        width: 60px;
+                        min-width: 60px;
+                        max-width: 60px;
+                        height: 34px;
+        }
+        #open-fullscreen-block {
+            width: 90vw;
+    }
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--main-color);
+}
+
+::-moz-scrollbar-thumb {
+    background-color: var(--main-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--main-color);
+}
+
+::-moz-scrollbar-thumb:hover {
+    background-color: var(--main-color);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-moz-scrollbar {
+    width: 10px;
+    height: 10px;
+}
