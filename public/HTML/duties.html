@@ -16,8 +16,9 @@
  <body>
  
 	<div id = 'add-form'>
-		<form action="/add" method="post">
-			<select name = 'studentName1'>
+		<form action = '/add' method = 'post'>
+<!-- 			<label>Сегодня дежурят<label><br> -->
+			<select name = 'studentName1' class = 'form-selector'>
 				<option value = ''>Выберите первого студента</option>
 				<option value = 'Богорадников Денис'>Богорадников Денис</option>
 				<option value = 'Бувин Алексей'>Бувин Алексей</option>
@@ -37,8 +38,9 @@
 				<option value = 'Шевченко Богдан'>Шевченко Богдан</option>
 				<option value = 'Шкиперов Дмитрий'>Шкиперов Дмитрий</option>
 				<option value = 'Яковлев Сергей'>Яковлев Сергей</option>
-			</select>
-			<select name = 'studentName2'>
+			</select><br>
+<!-- 			<label>И</label><br> -->
+			<select name = 'studentName2' class = 'form-selector'>
 				<option value = ''>Выберите второго студента</option>
 				<option value = 'Богорадников Денис'>Богорадников Денис</option>
 				<option value = 'Бувин Алексей'>Бувин Алексей</option>
@@ -58,13 +60,16 @@
 				<option value = 'Шевченко Богдан'>Шевченко Богдан</option>
 				<option value = 'Шкиперов Дмитрий'>Шкиперов Дмитрий</option>
 				<option value = 'Яковлев Сергей'>Яковлев Сергей</option>
-			</select>
-			<input type="submit" value="Отправить">
+			</select><br>
+			<input type = 'submit' class = 'submit-button' value = 'Добавить'>
 		</form>
 	</div>
  
-	<header id = 'header'>Дежурства</header>
-	
+	<header id = 'header'>
+		<div id = 'header-title'>Дежурства</div>
+		<button id = 'add-button' onclick = 'toggleAddNewDate()'>+</button>
+	</header>
+
 	<div id = 'main-block'>
 		
 
@@ -102,7 +107,7 @@
 			</div>
 		</div>
 
-		<div id = 'open-fullscreen-block'><div id = 'open-fullscreen' onclick = 'toggleAddNewDate()'></div></div>
+		<div id = 'open-fullscreen-block'><div id = 'open-fullscreen' onclick = 'toggleAddNewDate()'>+</div></div>
 
 	</div>
 
@@ -111,10 +116,14 @@
 		function id(id){return document.getElementById(id)}
 		
 		function toggleAddNewDate(){
-			if (id('add-form').style.transform == 'scale(1)')
+			if (id('add-form').style.transform == 'scale(1)'){
 				id('add-form').style.transform =  'scale(0)'
-			else
+				id('add-button').style.transform = 'rotate(0deg)'
+			}
+			else {
 				id('add-form').style.transform =  'scale(1)'
+				id('add-button').style.transform = 'rotate(45deg)'
+			}
 		}
 
 		ratingTable = id('rating-table')
