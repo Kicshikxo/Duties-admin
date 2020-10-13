@@ -297,8 +297,7 @@ body {
                 width: 90vw}
                 #names-table {
                     min-width: 86px;
-                    max-width: 86px;
-                    height: calc(67vh - 26px)}
+                    max-width: 86px}
                     .student-cell {
                         font-size: 10px;
 
@@ -308,8 +307,7 @@ body {
                         height: 34px;
                     }
                 #rating-table {
-                    width: 90vw;
-                    height: calc(67vh - 26px)}
+                    width: 90vw}
                     .mark {
                         font-size: 14px;
 
