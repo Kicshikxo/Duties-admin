@@ -292,10 +292,12 @@ body {
         }
         #table-block {
             width: 90vw;
-            height: 63vh}
+            height: 68vh}
             #rating-block {
+				height: 80vh;
                 width: 90vw}
                 #names-table {
+					height: 100%;
                     min-width: 86px;
                     max-width: 86px}
                     .student-cell {
@@ -307,6 +309,7 @@ body {
                         height: 34px;
                     }
                 #rating-table {
+					height: 100%;
                     width: 90vw}
                     .mark {
                         font-size: 14px;
