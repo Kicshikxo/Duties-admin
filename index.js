@@ -31,10 +31,10 @@ app.post("/add", urlencodedParser, async function (request, response) {
 	if (student1){
 	    await collection.update({name: student1.name}, {$set: {dates: student1.dates.concat(`${new Date().getDate()}.${new Date().getMonth()+1}`)}})
 		if (student2) await collection.update({name: student2.name}, {$set: {dates: student2.dates.concat(`${new Date().getDate()}.${new Date().getMonth()+1}`)}})
-		response.sendFile(__dirname + "/public/HTML/yes.html")
+		response.render(__dirname + "/public/HTML/yes.html")
 	}
 	else
-		response.sendFile(__dirname + "/public/HTML/no.html");
+		response.render(__dirname + "/public/HTML/no.html");
 })
 
 app.get('/*', async function(request, response){

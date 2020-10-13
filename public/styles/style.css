@@ -62,6 +62,9 @@ button:active, button:focus {
 		height: 5vh;
 		font-size: 20px;
 		text-align: center;
+		background: #FFF;
+		border: 1px solid var(--main-color);
+		border-radius: 5px;
 	}
 	.submit-button {
 		width: 20vw;
@@ -267,7 +270,7 @@ body {
 	}
 	.submit-button {
 		width: 50vw;
-		height: 4vh;
+		height: 30px;
 		border: none;
 		background: var(--main-color);
 		color: #FFF;

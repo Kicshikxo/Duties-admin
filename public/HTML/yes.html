@@ -1,13 +1,67 @@
 <!DOCTYPE html>
-<html lang="">
+<html>
   <head>
-    <meta charset="utf-8">
-    <title></title>
+    <meta name = 'viewport' content = 'width = device-width, initial-scale = 1, maximum-scale = 1, minimum-scale = 1, user-scalable = no, minimal-ui'>
+	<meta charset="UTF-8">
+	<meta name = 'full-screen' content = 'yes'>
+    <title>Успешно добавлено</title>
+    <link rel = 'stylesheet' type = 'text/css' src = 'styles/style.css'></link>
+    <style>
+		@font-face {
+			font-family: 'CenturyGothic';
+
+			src: url('../styles/fonts/CenturyGothic.ttf');
+		}
+
+		* {
+			font-family: 'CenturyGothic';
+
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+
+			-webkit-user-select: none;
+			text-decoration: none;
+			text-align: center;
+
+			outline: none !important;
+			-webkit-tap-highlight-color: #0000;
+		}
+		body {
+			width: 100vw;
+			height: 100vh;
+			
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+		#result-text {
+			font-size: 18px;
+			line-height: 30px;
+
+			width: 300px;
+			padding: 30px;
+
+			text-align: center;
+		}
+		#result-button {
+			font-size: 20px;
+			line-height: 48px;
+
+			width: 220px;
+			height: 48px;
+
+			color: #FFF;
+			border: none;
+			border-radius: 50px;
+			background: #47A19D;
+			margin-bottom: 10vh;
+		}
+    </style>
   </head>
   <body>
-    <header>успешно добавлено</header>
-    <main><a href = '/'>ок</a></main>
-    <footer></footer>
+   <div id = 'result-text'>Успешно добавлено</div>
+   <a href = '/'><button id = 'result-button'>Ок</button></a>
   </body>
 </html>
-
