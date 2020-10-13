@@ -73,10 +73,8 @@ button:active, button:focus {
 		border-radius: 50px;
 	}
 
-small {
-    font-size: .7em;
-
-    color: var(--main-color);
+body {
+	overflow: hidden;
 }
 
 #header {
