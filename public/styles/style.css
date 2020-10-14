@@ -68,6 +68,7 @@ button:active, button:focus {
 	}
 	#form-date {
 		margin-bottom: 20px;
+		background: #FFF;
 	}
 	.submit-button {
 		width: 20vw;
