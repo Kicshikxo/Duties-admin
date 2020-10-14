@@ -56,8 +56,18 @@ app.post("/add", urlencodedParser, async function (request, response) {
 
 app.post("/remove", urlencodedParser, async function (request, response) {
 	database = await collection.find({}, { projection: { _id: 0}})
-	
-	response.render(__dirname + '/public/HTML/result.html', {text: 'Не удалось удалить'});
+	var student
+	for (i of database){
+		if (i.name == request.body.studentName)
+			student = i
+	}
+	if (student && student.dates.indexOf(request.body.date) != -1) {
+		student.dates.splice(student.dates.indexOf(request.body.date), 1)
+		await collection.update({name: student.name}, {$set: {dates: student.dates}})
+		response.render(__dirname + '/public/HTML/result.html', {text: 'Успешно удалено'});
+	}
+	else 
+		response.render(__dirname + '/public/HTML/result.html', {text: 'Не удалось удалить'});
 })
 
 const PORT = process.env.PORT || 3000
