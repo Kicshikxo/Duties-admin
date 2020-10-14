@@ -61,6 +61,7 @@
 				<option value = 'Шкиперов Дмитрий'>Шкиперов Дмитрий</option>
 				<option value = 'Яковлев Сергей'>Яковлев Сергей</option>
 			</select><br>
+			<input type = 'date' name = 'date' id = 'form-date' required></input>
 			<input type = 'submit' class = 'submit-button' value = 'Добавить'>
 		</form>
 	</div>
@@ -190,7 +191,12 @@
 				}
 			}
 		}
-		window.onload = fillTable
+		
+		window.onload = function(){
+			fillTable()
+			let date = new Date()
+			id('form-date').value = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+		}
 
 	</script>
 
