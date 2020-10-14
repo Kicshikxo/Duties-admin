@@ -116,7 +116,8 @@ body {
 		color: #FFF;
 		transition: .5s;
 		font-size: 24px;
-		align-self: flex-end;
+		justify-content: center;
+		align-items: center;
 	}
     #add-button {
 		top: 0;
@@ -127,14 +128,20 @@ body {
 		top: 0;
 		left: 0;
 		display: none;
+		justify-content: center;
+		align-items: center;
 	}
 	#remove-button div {
 		transition: .5s;
 		position: absolute;
 		width: 100%;
 		height: 100%;
+/* 		line-height: 42px; */
 		top: 0;
 		left: 0;
+	}
+	#remove-button-1 {
+		left: 1px;
 	}
 #main-block {
     width: 80vw;
@@ -270,7 +277,7 @@ body {
 }
 @media (orientation: portrait) {
 	#add-button, #remove-button {
-		display: block;
+		display: flex;
 	}
 	
 	.form {
