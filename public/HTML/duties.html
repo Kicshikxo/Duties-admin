@@ -97,7 +97,7 @@
 	<header id = 'header'>
 		<div id = 'header-title'>Дежурства</div>
 		<button id = 'remove-button' onclick = 'toggleRemoveDate()'></button>
-		<button id = 'add-button'    onclick = 'toggleAddNewDate()'>+</button>
+		<button id = 'add-button'    onclick = 'toggleAddNewDate()'></button>
 	</header>
 
 	<div id = 'main-block'>
@@ -151,19 +151,18 @@
 		function toggleAddNewDate(){
 			if (id('add-form').style.transform == 'scale(1)'){
 				id('add-form').style.transform =  'scale(0)'
-				id('add-button').style.transform = 'rotate(0deg)'
-				
-// 				id('remove-button-1').style.transform = 'rotate(0deg)'
-// 				id('remove-button-2').style.transform = 'rotate(0deg)'
+
+				id('remove-button').classList.remove('opened')
+				id('add-button').classList.remove('opened')
 				
 				id('remove-form').style.transform =  'scale(0)'
 			}
 			else {
 				id('add-form').style.transform =  'scale(1)'
-				id('add-button').style.transform = 'rotate(45deg)'
 				
-// 				id('remove-button-1').style.transform = 'rotate(0deg)'
-// 				id('remove-button-2').style.transform = 'rotate(0deg)'
+
+				id('remove-button').classList.remove('opened')
+				id('add-button').classList.add('opened')
 				
 				id('remove-form').style.transform =  'scale(0)'
 			}
@@ -172,20 +171,19 @@
 		function toggleRemoveDate(){
 			if (id('remove-form').style.transform == 'scale(1)'){
 				id('remove-form').style.transform =  'scale(0)'
+
+				id('remove-button').classList.remove('opened')
 				
-// 				id('remove-button-1').style.transform = 'rotate(0deg)'
-// 				id('remove-button-2').style.transform = 'rotate(0deg)'
+				id('add-button').classList.remove('opened')
 				
-				id('add-button').style.transform = 'rotate(0deg)'
 				id('add-form').style.transform =  'scale(0)'
 			}
 			else {
 				id('remove-form').style.transform =  'scale(1)'
 				
-// 				id('remove-button-1').style.transform = 'rotate(45deg)'
-// 				id('remove-button-2').style.transform = 'rotate(-45deg)'
+				id('remove-button').classList.add('opened')
+				id('add-button').classList.remove('opened')
 				
-				id('add-button').style.transform = 'rotate(0deg)'
 				id('add-form').style.transform =  'scale(0)'
 			}
 		}

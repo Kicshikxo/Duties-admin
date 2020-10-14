@@ -123,6 +123,24 @@ body {
 		top: 0;
 		right: 0;
 		display: none;
+		transform: rotate(45deg);
+	}
+	#add-button.opened {
+		transform: rotate(0deg);
+	}
+	#add-button:before,
+	#add-button:after{
+		position: absolute;
+		content: '';
+		width: 12px;
+		height: 1px;
+		background: #FFF;
+	}
+	#add-button:before {
+		transform: rotate(45deg);
+	}
+	#add-button:after {
+		transform: rotate(-45deg);
 	}
 	#remove-button {
 		top: 0;
@@ -131,16 +149,17 @@ body {
 	}
 	#remove-button:before,
 	#remove-button:after{
+		transition: .5s;
 		position: absolute;
 		content: '';
 		width: 12px;
 		height: 1px;
 		background: #FFF;
 	}
-	#remove-button:before {
+	#remove-button.opened:before {
 		transform: rotate(45deg);
 	}
-	#remove-button:after {
+	#remove-button.opened:after {
 		transform: rotate(-45deg);
 	}
 
