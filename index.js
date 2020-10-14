@@ -29,8 +29,20 @@ app.post("/add", urlencodedParser, async function (request, response) {
 			student2 = i
 	}
 	if (student1){
-	    await collection.update({name: student1.name}, {$set: {dates: student1.dates.concat(`${new Date().getDate()}.${new Date().getMonth()+1}`)}})
-		if (student2) await collection.update({name: student2.name}, {$set: {dates: student2.dates.concat(`${new Date().getDate()}.${new Date().getMonth()+1}`)}})
+		let selectedDate = request.body.date.split('-').slice(1).reverse().join('.')
+	    await collection.update({name: student1.name}, {$set: {dates: student1.dates.concat(selectedDate).sort(function(a,b){
+			a = a.split('.')
+			b = b.split('.')
+			if (a[1] != b[1]) return a[1] - b[1]
+			else return a[0] - b[0]
+		})}})
+		if (student2) 
+			await collection.update({name: student2.name}, {$set: {dates: student2.dates.concat(selectedDate).sort(function(a,b){
+				a = a.split('.')
+				b = b.split('.')
+				if (a[1] != b[1]) return a[1] - b[1]
+				else return a[0] - b[0]
+			})}})
 		response.render(__dirname + "/public/HTML/yes.html")
 	}
 	else
