@@ -19,6 +19,13 @@ uri = 'mongodb+srv://Kicshikxo:ua3wikqwe@cluster0-8humy.gcp.mongodb.net/Duties'
 db = require('monk')(uri)
 collection = db.get('Duties')
 
+function sort(a,b){
+	a = a.split('.')
+	b = b.split('.')
+	if (a[1] != b[1]) return a[1] - b[1]
+	else return a[0] - b[0]
+}
+
 app.get('/*', async function(request, response){
 	database = await collection.find({}, { projection: { _id: 0}})
 	response.render(__dirname + "/public/HTML/duties.html", {database: database})
@@ -35,19 +42,9 @@ app.post("/add", urlencodedParser, async function (request, response) {
 	}
 	if (student1){
 		let selectedDate = request.body.date.split('-').slice(1).reverse().join('.')
-	    await collection.update({name: student1.name}, {$set: {dates: student1.dates.concat(selectedDate).sort(function(a,b){
-			a = a.split('.')
-			b = b.split('.')
-			if (a[1] != b[1]) return a[1] - b[1]
-			else return a[0] - b[0]
-		})}})
+	    await collection.update({name: student1.name}, {$set: {dates: student1.dates.concat(selectedDate).sort(sort)}})
 		if (student2) 
-			await collection.update({name: student2.name}, {$set: {dates: student2.dates.concat(selectedDate).sort(function(a,b){
-				a = a.split('.')
-				b = b.split('.')
-				if (a[1] != b[1]) return a[1] - b[1]
-				else return a[0] - b[0]
-			})}})
+			await collection.update({name: student2.name}, {$set: {dates: student2.dates.concat(selectedDate).sort(sort)}})
 		response.render(__dirname + '/public/HTML/result.html', {text: 'Успешно добавлено'})
 	}
 	else

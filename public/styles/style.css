@@ -106,9 +106,7 @@ body {
     box-shadow: 0 0 10px 0 rgba(50, 50, 50, .75)}
     #header button {
 		position: absolute;
-		    width: 42px;
-		min-width: 42px;
-		max-width: 42px;
+		width: 42px;
 		height: 42px;
 		border: none;
 		line-height: 42px;
