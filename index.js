@@ -19,6 +19,11 @@ uri = 'mongodb+srv://Kicshikxo:ua3wikqwe@cluster0-8humy.gcp.mongodb.net/Duties'
 db = require('monk')(uri)
 collection = db.get('Duties')
 
+app.get('/*', async function(request, response){
+	database = await collection.find({}, { projection: { _id: 0}})
+	response.render(__dirname + "/public/HTML/duties.html", {database: database})
+})
+
 app.post("/add", urlencodedParser, async function (request, response) {
 	database = await collection.find({}, { projection: { _id: 0}})
 	var student1, student2
@@ -43,15 +48,16 @@ app.post("/add", urlencodedParser, async function (request, response) {
 				if (a[1] != b[1]) return a[1] - b[1]
 				else return a[0] - b[0]
 			})}})
-		response.render(__dirname + "/public/HTML/yes.html")
+		response.render(__dirname + '/public/HTML/result.html', {text: 'Успешно добавлено'})
 	}
 	else
-		response.render(__dirname + "/public/HTML/no.html");
+		response.render(__dirname + '/public/HTML/result.html', {text: 'Не добавлено'});
 })
 
-app.get('/*', async function(request, response){
+app.post("/remove", urlencodedParser, async function (request, response) {
 	database = await collection.find({}, { projection: { _id: 0}})
-	response.render(__dirname + "/public/HTML/duties.html", {database: database})
+	
+	response.render(__dirname + '/public/HTML/result.html', {text: 'Не удалось удалить'});
 })
 
 const PORT = process.env.PORT || 3000

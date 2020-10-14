@@ -15,9 +15,8 @@
 
  <body>
  
-	<div id = 'add-form'>
+	<div id = 'add-form' class = 'form'>
 		<form action = '/add' method = 'post'>
-<!-- 			<label>Сегодня дежурят<label><br> -->
 			<select name = 'studentName1' class = 'form-selector'>
 				<option value = ''>Выберите первого студента</option>
 				<option value = 'Богорадников Денис'>Богорадников Денис</option>
@@ -39,7 +38,6 @@
 				<option value = 'Шкиперов Дмитрий'>Шкиперов Дмитрий</option>
 				<option value = 'Яковлев Сергей'>Яковлев Сергей</option>
 			</select><br>
-<!-- 			<label>И</label><br> -->
 			<select name = 'studentName2' class = 'form-selector'>
 				<option value = ''>Выберите второго студента</option>
 				<option value = 'Богорадников Денис'>Богорадников Денис</option>
@@ -65,10 +63,41 @@
 			<input type = 'submit' class = 'submit-button' value = 'Добавить'>
 		</form>
 	</div>
+	
+	<div id = 'remove-form' class = 'form'>
+		<form action = '/remove' method = 'post'>
+			<select name = 'studentName' class = 'form-selector' id = 'remove-form-student-selector'>
+				<option value = ''>Выберите студента</option>
+				<option value = 'Богорадников Денис'>Богорадников Денис</option>
+				<option value = 'Бувин Алексей'>Бувин Алексей</option>
+				<option value = 'Дрюченко Артём'>Дрюченко Артём</option>
+				<option value = 'Заживихин Дмитрий'>Заживихин Дмитрий</option>
+				<option value = 'Кривдин Сергей'>Кривдин Сергей</option>
+				<option value = 'Крючкин Данил'>Крючкин Данил</option>
+				<option value = 'Кузнецов Валерий'>Кузнецов Валерий</option>
+				<option value = 'Маховицкий Владимир'>Маховицкий Владимир</option>
+				<option value = 'Машнин Владислав'>Машнин Владислав</option>
+				<option value = 'Озеров Роман'>Озеров Роман</option>
+				<option value = 'Полыновский Дмитрий'>Полыновский Дмитрий</option>
+				<option value = 'Скорятин Игорь'>Скорятин Игорь</option>
+				<option value = 'Спицын Денис'>Спицын Денис</option>
+				<option value = 'Тярин Богдан'>Тярин Богдан</option>
+				<option value = 'Фурсин Владислав'>Фурсин Владислав</option>
+				<option value = 'Шевченко Богдан'>Шевченко Богдан</option>
+				<option value = 'Шкиперов Дмитрий'>Шкиперов Дмитрий</option>
+				<option value = 'Яковлев Сергей'>Яковлев Сергей</option>
+			</select><br>
+			<select name = 'date' class = 'form-selector' id = 'remove-form-date-selector'>
+				<option value = ''>Выберите дату</option>
+			</select><br>
+			<input type = 'submit' class = 'submit-button' value = 'Удалить'>
+		</form>
+	</div>
  
 	<header id = 'header'>
 		<div id = 'header-title'>Дежурства</div>
-		<button id = 'add-button' onclick = 'toggleAddNewDate()'>+</button>
+		<button id = 'remove-button' onclick = 'toggleRemoveDate()'>−</button>
+		<button id = 'add-button'    onclick = 'toggleAddNewDate()'>+</button>
 	</header>
 
 	<div id = 'main-block'>
@@ -108,7 +137,10 @@
 			</div>
 		</div>
 
-		<div id = 'open-fullscreen-block'><div id = 'open-fullscreen' onclick = 'toggleAddNewDate()'>+</div></div>
+		<div id = 'open-fullscreen-block'>
+			<div id = 'open-fullscreen' onclick = 'toggleAddNewDate()'>+</div>
+			<div id = 'open-fullscreen' onclick = 'toggleRemoveDate()'>-</div>
+		</div>
 
 	</div>
 
@@ -120,10 +152,41 @@
 			if (id('add-form').style.transform == 'scale(1)'){
 				id('add-form').style.transform =  'scale(0)'
 				id('add-button').style.transform = 'rotate(0deg)'
+				id('remove-button').style.transform = 'rotate(0deg)'
+				id('remove-form').style.transform =  'scale(0)'
 			}
 			else {
 				id('add-form').style.transform =  'scale(1)'
 				id('add-button').style.transform = 'rotate(45deg)'
+				id('remove-button').style.transform = 'rotate(0deg)'
+				id('remove-form').style.transform =  'scale(0)'
+			}
+		}
+		
+		function toggleRemoveDate(){
+			if (id('remove-form').style.transform == 'scale(1)'){
+				id('remove-form').style.transform =  'scale(0)'
+				id('remove-button').style.transform = 'rotate(0deg)'
+				id('add-button').style.transform = 'rotate(0deg)'
+				id('add-form').style.transform =  'scale(0)'
+			}
+			else {
+				id('remove-form').style.transform =  'scale(1)'
+				id('remove-button').style.transform = 'rotate(45deg)'
+				id('add-button').style.transform = 'rotate(0deg)'
+				id('add-form').style.transform =  'scale(0)'
+			}
+		}
+		
+		id('remove-form-student-selector').oninput = function(){
+			id('remove-form-date-selector').innerHTML = '<option value = "">Выберите дату</option>'
+			for (i of database){
+// 				console.log(i.name)
+				if (i.name == this.value){
+// 					console.log(`Выбранное имя: ${i.name}`)
+					id('remove-form-date-selector').innerHTML = '<option value = "">Выберите дату</option>'
+					for (j of i.dates) id('remove-form-date-selector').innerHTML += `<option value = '${j}'>${j}</option>`
+				}
 			}
 		}
 

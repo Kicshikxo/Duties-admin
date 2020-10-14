@@ -30,7 +30,7 @@ button:active, button:focus {
 	outline: none !important;
 }
 
-#add-form {
+.form {
 	position: fixed;
 	z-index: 100;
 	top: 15vh;
@@ -51,7 +51,7 @@ button:active, button:focus {
 	border: 1px solid var(--main-color);
 	border-radius: 4px;
 	background: #FFFE}
-	#add-form form {
+	.form form {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -104,15 +104,12 @@ body {
 
     background: var(--main-color);
     box-shadow: 0 0 10px 0 rgba(50, 50, 50, .75)}
-    #add-button {
+    #header button {
 		position: absolute;
-		top: 0;
-		right: 0;
 		    width: 42px;
 		min-width: 42px;
 		max-width: 42px;
 		height: 42px;
-		display: none;
 		border: none;
 		line-height: 42px;
 		background: none;
@@ -120,6 +117,16 @@ body {
 		transition: .5s;
 		font-size: 24px;
 		align-self: flex-end;
+	}
+    #add-button {
+		top: 0;
+		right: 0;
+		display: none;
+	}
+	#remove-button {
+		top: 0;
+		left: 0;
+		display: none;
 	}
 #main-block {
     width: 80vw;
@@ -207,7 +214,6 @@ body {
                 order: 2}
                 .mark {
                     font-size: 18px;
-/*                     font-weight: bold; */
 
                     display: table-cell;
 
@@ -255,11 +261,11 @@ body {
     }
 }
 @media (orientation: portrait) {
-	#add-button {
+	#add-button, #remove-button {
 		display: block;
 	}
 	
-	#add-form {
+	.form {
 		top: 20vh;
 		left: 7vw;
 
