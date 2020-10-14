@@ -96,11 +96,8 @@
  
 	<header id = 'header'>
 		<div id = 'header-title'>Дежурства</div>
-		<button id = 'remove-button' onclick = 'toggleRemoveDate()'>
-			<div id = 'remove-button-1'>−</div>
-			<div id = 'remove-button-2'>−</div>
-		</button>
-		<button id = 'add-button' onclick = 'toggleAddNewDate()'>+</button>
+		<button id = 'remove-button' onclick = 'toggleRemoveDate()'></button>
+		<button id = 'add-button'    onclick = 'toggleAddNewDate()'>+</button>
 	</header>
 
 	<div id = 'main-block'>
@@ -156,8 +153,8 @@
 				id('add-form').style.transform =  'scale(0)'
 				id('add-button').style.transform = 'rotate(0deg)'
 				
-				id('remove-button-1').style.transform = 'rotate(0deg)'
-				id('remove-button-2').style.transform = 'rotate(0deg)'
+// 				id('remove-button-1').style.transform = 'rotate(0deg)'
+// 				id('remove-button-2').style.transform = 'rotate(0deg)'
 				
 				id('remove-form').style.transform =  'scale(0)'
 			}
@@ -165,8 +162,8 @@
 				id('add-form').style.transform =  'scale(1)'
 				id('add-button').style.transform = 'rotate(45deg)'
 				
-				id('remove-button-1').style.transform = 'rotate(0deg)'
-				id('remove-button-2').style.transform = 'rotate(0deg)'
+// 				id('remove-button-1').style.transform = 'rotate(0deg)'
+// 				id('remove-button-2').style.transform = 'rotate(0deg)'
 				
 				id('remove-form').style.transform =  'scale(0)'
 			}
@@ -176,8 +173,8 @@
 			if (id('remove-form').style.transform == 'scale(1)'){
 				id('remove-form').style.transform =  'scale(0)'
 				
-				id('remove-button-1').style.transform = 'rotate(0deg)'
-				id('remove-button-2').style.transform = 'rotate(0deg)'
+// 				id('remove-button-1').style.transform = 'rotate(0deg)'
+// 				id('remove-button-2').style.transform = 'rotate(0deg)'
 				
 				id('add-button').style.transform = 'rotate(0deg)'
 				id('add-form').style.transform =  'scale(0)'
@@ -185,8 +182,8 @@
 			else {
 				id('remove-form').style.transform =  'scale(1)'
 				
-				id('remove-button-1').style.transform = 'rotate(45deg)'
-				id('remove-button-2').style.transform = 'rotate(-45deg)'
+// 				id('remove-button-1').style.transform = 'rotate(45deg)'
+// 				id('remove-button-2').style.transform = 'rotate(-45deg)'
 				
 				id('add-button').style.transform = 'rotate(0deg)'
 				id('add-form').style.transform =  'scale(0)'
