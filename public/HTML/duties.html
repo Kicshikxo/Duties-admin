@@ -96,8 +96,11 @@
  
 	<header id = 'header'>
 		<div id = 'header-title'>Дежурства</div>
-		<button id = 'remove-button' onclick = 'toggleRemoveDate()'>−</button>
-		<button id = 'add-button'    onclick = 'toggleAddNewDate()'>+</button>
+		<button id = 'remove-button' onclick = 'toggleRemoveDate()'>
+			<div id = 'remove-button-1'>−</div>
+			<div id = 'remove-button-2'>−</div>
+		</button>
+		<button id = 'add-button' onclick = 'toggleAddNewDate()'>+</button>
 	</header>
 
 	<div id = 'main-block'>
@@ -152,13 +155,19 @@
 			if (id('add-form').style.transform == 'scale(1)'){
 				id('add-form').style.transform =  'scale(0)'
 				id('add-button').style.transform = 'rotate(0deg)'
-				id('remove-button').style.transform = 'rotate(0deg)'
+				
+				id('remove-button-1').style.transform = 'rotate(0deg)'
+				id('remove-button-2').style.transform = 'rotate(0deg)'
+				
 				id('remove-form').style.transform =  'scale(0)'
 			}
 			else {
 				id('add-form').style.transform =  'scale(1)'
 				id('add-button').style.transform = 'rotate(45deg)'
-				id('remove-button').style.transform = 'rotate(0deg)'
+				
+				id('remove-button-1').style.transform = 'rotate(0deg)'
+				id('remove-button-2').style.transform = 'rotate(0deg)'
+				
 				id('remove-form').style.transform =  'scale(0)'
 			}
 		}
@@ -166,13 +175,19 @@
 		function toggleRemoveDate(){
 			if (id('remove-form').style.transform == 'scale(1)'){
 				id('remove-form').style.transform =  'scale(0)'
-				id('remove-button').style.transform = 'rotate(0deg)'
+				
+				id('remove-button-1').style.transform = 'rotate(0deg)'
+				id('remove-button-2').style.transform = 'rotate(0deg)'
+				
 				id('add-button').style.transform = 'rotate(0deg)'
 				id('add-form').style.transform =  'scale(0)'
 			}
 			else {
 				id('remove-form').style.transform =  'scale(1)'
-				id('remove-button').style.transform = 'rotate(45deg)'
+				
+				id('remove-button-1').style.transform = 'rotate(45deg)'
+				id('remove-button-2').style.transform = 'rotate(-45deg)'
+				
 				id('add-button').style.transform = 'rotate(0deg)'
 				id('add-form').style.transform =  'scale(0)'
 			}
@@ -181,9 +196,7 @@
 		id('remove-form-student-selector').oninput = function(){
 			id('remove-form-date-selector').innerHTML = '<option value = "">Выберите дату</option>'
 			for (i of database){
-// 				console.log(i.name)
 				if (i.name == this.value){
-// 					console.log(`Выбранное имя: ${i.name}`)
 					id('remove-form-date-selector').innerHTML = '<option value = "">Выберите дату</option>'
 					for (j of i.dates) id('remove-form-date-selector').innerHTML += `<option value = '${j}'>${j}</option>`
 				}
