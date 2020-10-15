@@ -330,6 +330,10 @@ body {
 		padding: 32px
 	}
 	
+	#header {
+		border-radius: 0 0 10px 10px;
+	}
+	
 	.form-selector {
 		width: 75vw;
 		height: 5vh;
