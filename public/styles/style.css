@@ -39,8 +39,7 @@ button:active, button:focus {
 .form {
 	position: fixed;
 	z-index: 100;
-	top: 15vh;
-	left: 27vw;
+	margin: auto;
 
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -51,9 +50,9 @@ button:active, button:focus {
 	justify-content: center;
 	align-items: center;
 
-	width: 46vw;
-	height: 65vh;
-	padding: 48px;
+	width: 40vw;
+	height: 50vh;
+	padding: 32px;
 	border: 1px solid var(--main-color);
 	border-radius: 4px;
 	background: #FFFE}
@@ -90,6 +89,10 @@ button:active, button:focus {
 
 body {
 	overflow: hidden;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #header {
@@ -170,7 +173,6 @@ body {
 #main-block {
     width: 80vw;
     height: calc(100vh - 42px);
-    margin-left: 10vw;
     margin-top: 42px;
 	
 	display: flex;
@@ -319,11 +321,8 @@ body {
 	}
 	
 	.form {
-		top: 20vh;
-		left: 7vw;
-
-		width: 86vw;
-		height: 63vh;
+		width: 90vw;
+		height: 40vh;
 		padding: 32px
 	}
 	

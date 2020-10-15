@@ -263,6 +263,7 @@
 		tr = document.getElementsByTagName('tr')
 		
 		function fillTable(){
+			id('rating-table').innerHTML = '<tr></tr>'.repeat(18)
 			onDutyToday = []
 			for (i of database){
 				if (i.dates.length == 0){
