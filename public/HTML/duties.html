@@ -274,12 +274,27 @@
 				}
 			}
 			if (onDutyToday) id('info-block').innerHTML = `Сегодня ${(onDutyToday.length > 1) ? 'дежурят' : 'дежурит'}: ${onDutyToday.join(', ')}`
+			else {
+				lastDate = 0
+				for (i of database){
+					for (j of i.dates){
+						if (new Date(j.split('.').reverse().join('.')) > lastDate) lastDate = new Date(j.split('.').reverse().join('.'))
+					}
+				}
+				lastDate = `${lastDate.getDate()}.${lastDate.getMonth()+1}.${lastDate.getFullYear()}`
+				lastDuty = []
+				for (i of database){
+					for (j of i.dates){
+						if (j == lastDate) lastDuty.push(i.name)
+					}
+				}
+				id('info-block').innerHTML = `Последний раз ${(lastDuty.length > 1) ? 'дежурили' : 'дежурил'}: ${lastDuty.join(', ')}`
+			}
 		}
 		
 		window.onload = function(){
 			fillTable()
-			let date = new Date()
-			id('form-date').value = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+			id('form-date').value = `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`
 		}
 
 	</script>
