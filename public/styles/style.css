@@ -169,9 +169,14 @@ body {
 
 #main-block {
     width: 80vw;
-    height: 100vh;
+    height: calc(100vh - 42px);
     margin-left: 10vw;
-    padding-top: 10vh;
+    margin-top: 42px;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 
     background: #FFF;
 	z-index: 75;
