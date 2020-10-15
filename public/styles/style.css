@@ -111,7 +111,6 @@ body {
 	font-size: 24px;
 
     transition: .5s;
-	transform: translate(0, -42px);
 
     background: var(--main-color);
     box-shadow: 0 0 10px 0 rgba(50, 50, 50, .75)}
@@ -336,6 +335,7 @@ body {
 	
 	#header {
 		border-radius: 0 0 10px 10px;
+		transform: translate(0, -42px);
 	}
 	
 	.form-selector {
