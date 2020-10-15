@@ -267,7 +267,7 @@
 			onDutyToday = []
 			for (i of database){
 				if (i.dates.length == 0){
-					tr[nameToNumber[i.name]].innerHTML += "<td class = 'mark'></td>"
+					tr[nameToNumber[i.name]].innerHTML += "<td class = 'mark blank'></td>"
 				}
 				else for (j of i.dates){
 					tr[nameToNumber[i.name]].innerHTML += `<td class = 'mark'><div>${j.split('.').slice(0,2).join('.')}<small>${daysToNumber[new Date(j.split('.').reverse().join('.')).getDay()]}</small></div></td>`

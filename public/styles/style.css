@@ -281,6 +281,9 @@ body {
                     border: 1px solid var(--main-color);
                     border-left: none;
                     background: #FFF}
+				.mark.blank {
+					border: none;
+				}
 				.mark div{
 					display: flex;
 					justify-content: center;
