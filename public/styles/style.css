@@ -110,7 +110,7 @@ body {
 	color: #FFF;
 	font-size: 24px;
 
-    transition: .5s transform box-shadow;
+    transition: .5s transform, .5s box-shadow;
 
     background: var(--main-color);
     box-shadow: 0 0 10px 0 rgba(50, 50, 50, .75)}
