@@ -103,7 +103,7 @@
 	<div id = 'main-block'>
 		
 
-		<div id = 'selectors-block'></div>
+		<div id = 'info-block'></div>
 
 		<div id = 'table-block'>
 			<div>
@@ -263,14 +263,17 @@
 		tr = document.getElementsByTagName('tr')
 		
 		function fillTable(){
+			onDutyToday = []
 			for (i of database){
 				if (i.dates.length == 0){
 					tr[nameToNumber[i.name]].innerHTML += "<td class = 'mark'></td>"
 				}
 				else for (j of i.dates){
 					tr[nameToNumber[i.name]].innerHTML += `<td class = 'mark'><div>${j.split('.').slice(0,2).join('.')}<small>${daysToNumber[new Date(j.split('.').reverse().join('.')).getDay()]}</small></div></td>`
+					if (j == `${new Date().getDate()}.${new Date().getMonth()+1}.${new Date().getFullYear()}`) onDutyToday.push(i.name)
 				}
 			}
+			if (onDutyToday) id('info-block').innerHTML = `Сегодня ${(onDutyToday.length > 1) ? 'дежурят' : 'дежурит'}: ${onDutyToday.join(', ')}`
 		}
 		
 		window.onload = function(){

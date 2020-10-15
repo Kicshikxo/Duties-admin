@@ -176,9 +176,10 @@ body {
     background: #FFF;
 	z-index: 75;
     box-shadow: 0 0 10px 0 rgba(34, 60, 80, .2)}
-    #selectors-block {
+    #info-block {
         display: flex;
-        justify-content: left;
+        justify-content: center;
+		align-items: center;
 
         width: 70vw;
         height: 41px;
@@ -340,7 +341,8 @@ body {
     #main-block {
         width: 100vw;
         margin-left: 0}
-        #selectors-block {
+        #info-block {
+			font-size: 10px;
             width: 90vw;
             height: 27px}
             .selector {
