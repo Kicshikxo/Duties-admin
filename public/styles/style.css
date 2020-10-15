@@ -111,11 +111,20 @@ body {
     background: var(--main-color);
     box-shadow: 0 0 10px 0 rgba(50, 50, 50, .75)}
     #header-date {
-		width: 46px;
-		height: 24px;
+		width: 0px;
+		height: 0px;
 		border: none;
 		background: #0000;
-		color: #0000;
+/* 		color: #0000; */
+	}
+	#header-date-block {
+		display: block;
+		position: absolute;
+		width: 42px;
+		height: 42px;
+		top: 0;
+		right: 42px;
+		background: #999
 	}
     #header button {
 		position: absolute;
