@@ -282,14 +282,16 @@
 						if (new Date(j.split('.').reverse().join('.')) > lastDate) lastDate = new Date(j.split('.').reverse().join('.'))
 					}
 				}
-				lastDate = `${lastDate.getDate()}.${lastDate.getMonth()+1}.${lastDate.getFullYear()}`
-				lastDuty = []
-				for (i of database){
-					for (j of i.dates){
-						if (j == lastDate) lastDuty.push(i.name)
+				if (lastDate){
+					lastDate = `${lastDate.getDate()}.${lastDate.getMonth()+1}.${lastDate.getFullYear()}`
+					lastDuty = []
+					for (i of database){
+						for (j of i.dates){
+							if (j == lastDate) lastDuty.push(i.name)
+						}
 					}
+					id('info-block').innerHTML = `Последний раз ${(lastDuty.length > 1) ? 'дежурили' : 'дежурил'}: ${lastDuty.join(', ')}`
 				}
-				id('info-block').innerHTML = `Последний раз ${(lastDuty.length > 1) ? 'дежурили' : 'дежурил'}: ${lastDuty.join(', ')}`
 			}
 		}
 		
