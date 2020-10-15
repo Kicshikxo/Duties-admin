@@ -16,7 +16,7 @@
  <body>
  
 	<div id = 'add-form' class = 'form'>
-		<form action = '/add' method = 'post'>
+		<form action = '/add' method = 'post' onsubmit = 'document.getElementById("add-form-submit-button").style.pointerEvents = "none"'>
 			<select name = 'studentName1' class = 'form-selector'>
 				<option value = ''>Выберите первого студента</option>
 				<option value = 'Богорадников Денис'>Богорадников Денис</option>
@@ -60,12 +60,12 @@
 				<option value = 'Яковлев Сергей'>Яковлев Сергей</option>
 			</select><br>
 			<input type = 'date' name = 'date' id = 'form-date' required></input>
-			<input type = 'submit' class = 'submit-button' value = 'Добавить'>
+			<input type = 'submit' id = 'add-form-submit-button' class = 'submit-button' value = 'Добавить'>
 		</form>
 	</div>
 	
 	<div id = 'remove-form' class = 'form'>
-		<form action = '/remove' method = 'post'>
+		<form action = '/remove' method = 'post' onsubmit = 'document.getElementById("add-remove-submit-button").style.pointerEvents = "none"'>
 			<select name = 'studentName' class = 'form-selector' id = 'remove-form-student-selector'>
 				<option value = ''>Выберите студента</option>
 				<option value = 'Богорадников Денис'>Богорадников Денис</option>
@@ -90,7 +90,7 @@
 			<select name = 'date' class = 'form-selector' id = 'remove-form-date-selector'>
 				<option value = ''>Выберите дату</option>
 			</select><br>
-			<input type = 'submit' class = 'submit-button' value = 'Удалить'>
+			<input type = 'submit' id = 'remove-form-submit-button' class = 'submit-button' value = 'Удалить'>
 		</form>
 	</div>
  
