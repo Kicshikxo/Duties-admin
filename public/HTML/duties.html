@@ -274,7 +274,7 @@
 					if (j == `${new Date().getDate()}.${new Date().getMonth()+1}.${new Date().getFullYear()}`) onDutyToday.push(i.name)
 				}
 			}
-			if (onDutyToday) id('info-block').innerHTML = `Сегодня ${(onDutyToday.length > 1) ? 'дежурят' : 'дежурит'}: ${onDutyToday.join(', ')}`
+			if (onDutyToday.length != 0) id('info-block').innerHTML = `Сегодня ${(onDutyToday.length > 1) ? 'дежурят' : 'дежурит'}: ${onDutyToday.join(', ')}`
 			else {
 				lastDate = 0
 				for (i of database){
