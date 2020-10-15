@@ -322,13 +322,13 @@ body {
 	}
 	
 	.form {
-		width: 90vw;
+		width: 85vw;
 		height: 40vh;
 		padding: 32px
 	}
 	
 	.form-selector {
-		width: 80vw;
+		width: 75vw;
 		height: 5vh;
 		font-size: 16px;
 		text-align: center;
