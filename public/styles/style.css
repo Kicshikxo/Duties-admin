@@ -348,7 +348,8 @@ body {
         margin-left: 0}
         #info-block {
 			font-size: 10px;
-            width: 90vw;
+            width: 95vw;
+			margin-top: 2.5vw;
             height: 27px}
             .selector {
                 font-size: 10px;
@@ -357,11 +358,11 @@ body {
                 height: 26px;
         }
         #table-block {
-            width: 90vw;
+            width: 95vw;
             height: 90vh}
             #rating-block {
-				height: 84vh;
-                width: 90vw}
+				height: calc(100vh - 42px - 5vw - 27px);
+                width: 95vw}
                 #names-table {
 					height: 100%;
                     min-width: 86px;
