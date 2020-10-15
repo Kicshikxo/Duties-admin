@@ -298,6 +298,9 @@
 		window.onload = function(){
 			fillTable()
 			id('form-date').value = `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`
+			setTimeout(function(){
+				id('header').style.transform = 'translate(0, 0)'
+			}, 500)
 		}
 
 	</script>

@@ -110,7 +110,8 @@ body {
 	color: #FFF;
 	font-size: 24px;
 
-    transition: .3s height;
+    transition: .5s;
+	transform: translate(0, -42px);
 
     background: var(--main-color);
     box-shadow: 0 0 10px 0 rgba(50, 50, 50, .75)}
@@ -354,6 +355,7 @@ body {
 	}
 
     #main-block {
+		box-shadow: none;
         width: 100vw;
         margin-left: 0}
         #info-block {
