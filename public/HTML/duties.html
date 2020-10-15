@@ -193,7 +193,7 @@
 			for (i of database){
 				if (i.name == this.value){
 					id('remove-form-date-selector').innerHTML = '<option value = "">Выберите дату</option>'
-					for (j of i.dates) id('remove-form-date-selector').innerHTML += `<option value = '${j}'>${j}</option>`
+					for (j of i.dates) id('remove-form-date-selector').innerHTML += `<option value = '${j}'>${j.split('.').slice(0,2).join('.')}</option>`
 				}
 			}
 		}
