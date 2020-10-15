@@ -26,6 +26,12 @@
 	-webkit-tap-highlight-color: #0000;
 }
 
+small {
+    font-size: .6em;
+
+    color: var(--main-color);
+}
+
 button:active, button:focus {
 	outline: none !important;
 }
@@ -250,10 +256,12 @@ body {
 
                     display: table-cell;
 
-                    width: 64px;
-                    min-width: 64px;
-                    max-width: 64px;
-                    height: 48px;
+						width: 74px;
+                    min-width: 74px;
+                    max-width: 74px;
+						height: 48px;
+					min-height: 48px;
+					max-height: 48px;
                     padding: 2px 4px;
 
                     text-align: center;
@@ -261,6 +269,12 @@ body {
                     border: 1px solid var(--main-color);
                     border-left: none;
                     background: #FFF}
+				.mark div{
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					flex-direction: column
+				}
 				tr:first-child td{
 					border-top: none !important;
 				}
@@ -359,9 +373,9 @@ body {
                     .mark {
                         font-size: 14px;
 
-                        width: 46px;
-                        min-width: 46px;
-                        max-width: 46px;
+                        width: 58px;
+                        min-width: 58px;
+                        max-width: 58px;
                         height: 34px;
         }
         #open-fullscreen-block {
