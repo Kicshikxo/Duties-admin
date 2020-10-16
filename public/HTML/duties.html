@@ -151,40 +151,59 @@
 		function toggleAddNewDate(){
 			if (id('add-form').style.transform == 'scale(1)'){
 				id('add-form').style.transform =  'scale(0)'
-
-				id('remove-button').classList.remove('opened')
 				id('add-button').classList.remove('opened')
-				
+
 				id('remove-form').style.transform =  'scale(0)'
+				id('remove-button').classList.remove('opened')
 			}
 			else {
 				id('add-form').style.transform =  'scale(1)'
-				
-
-				id('remove-button').classList.remove('opened')
 				id('add-button').classList.add('opened')
 				
 				id('remove-form').style.transform =  'scale(0)'
+				id('remove-button').classList.remove('opened')
+				
+				setTimeout(function(){
+					window.onclick = function(e){
+						if (!id('add-form').contains(event.target)) {
+							id('add-form').style.transform =  'scale(0)'
+							id('add-button').classList.remove('opened')
+
+							id('remove-form').style.transform =  'scale(0)'
+							id('remove-button').classList.remove('opened')
+							window.onclick = null
+						}
+					}
+				})
 			}
 		}
 		
 		function toggleRemoveDate(){
 			if (id('remove-form').style.transform == 'scale(1)'){
 				id('remove-form').style.transform =  'scale(0)'
-
 				id('remove-button').classList.remove('opened')
 				
-				id('add-button').classList.remove('opened')
-				
 				id('add-form').style.transform =  'scale(0)'
+				id('add-button').classList.remove('opened')
 			}
 			else {
 				id('remove-form').style.transform =  'scale(1)'
-				
 				id('remove-button').classList.add('opened')
-				id('add-button').classList.remove('opened')
 				
 				id('add-form').style.transform =  'scale(0)'
+				id('add-button').classList.remove('opened')
+				setTimeout(function(){
+					window.onclick = function(e){
+						if (!id('add-form').contains(event.target)) {
+							id('remove-form').style.transform =  'scale(0)'
+							id('remove-button').classList.remove('opened')
+							
+							id('add-form').style.transform =  'scale(0)'
+							id('add-button').classList.remove('opened')
+							window.onclick = null
+						}
+					}
+				})
 			}
 		}
 		
@@ -290,7 +309,10 @@
 							if (j == lastDate) lastDuty.push(i.name)
 						}
 					}
-					id('info-block').innerHTML = `Последний раз ${(lastDuty.length > 1) ? 'дежурили' : 'дежурил'}: ${lastDuty.join(', ')}`
+					if (new Date() < new Date(lastDate.split('.').reverse().join('.')))
+						id('info-block').innerHTML = `${(lastDuty.length > 1) ? 'Следующие дежурные' : 'Следующий дежурный'}: ${lastDuty.join(', ')}`
+					else 
+						id('info-block').innerHTML = `Последний раз ${(lastDuty.length > 1) ? 'дежурили' : 'дежурил'}: ${lastDuty.join(', ')}`
 				}
 			}
 		}
