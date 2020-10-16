@@ -155,6 +155,7 @@
 
 				id('remove-form').style.transform =  'scale(0)'
 				id('remove-button').classList.remove('opened')
+				window.onclick = null
 			}
 			else {
 				id('add-form').style.transform =  'scale(1)'
@@ -162,7 +163,7 @@
 				
 				id('remove-form').style.transform =  'scale(0)'
 				id('remove-button').classList.remove('opened')
-				
+				window.onclick = null
 				setTimeout(function(){
 					window.onclick = function(e){
 						if (!id('add-form').contains(event.target)) {
@@ -185,6 +186,7 @@
 				
 				id('add-form').style.transform =  'scale(0)'
 				id('add-button').classList.remove('opened')
+				window.onclick = null
 			}
 			else {
 				id('remove-form').style.transform =  'scale(1)'
@@ -192,6 +194,7 @@
 				
 				id('add-form').style.transform =  'scale(0)'
 				id('add-button').classList.remove('opened')
+				window.onclick = null
 				setTimeout(function(){
 					window.onclick = function(e){
 						if (!id('remove-form').contains(event.target)) {
