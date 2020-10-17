@@ -17,7 +17,7 @@
  
 	<div id = 'add-form' class = 'form'>
 		<form action = '/add' method = 'post' onsubmit = 'document.getElementById("add-form-submit-button").style.pointerEvents = "none"'>
-			<select name = 'studentName1' class = 'form-selector'>
+			<select name = 'studentName1' class = 'form-selector' required>
 				<option value = ''>Выберите первого студента</option>
 				<option value = 'Богорадников Денис'>Богорадников Денис</option>
 				<option value = 'Бувин Алексей'>Бувин Алексей</option>
@@ -38,7 +38,7 @@
 				<option value = 'Шкиперов Дмитрий'>Шкиперов Дмитрий</option>
 				<option value = 'Яковлев Сергей'>Яковлев Сергей</option>
 			</select><br>
-			<select name = 'studentName2' class = 'form-selector'>
+			<select name = 'studentName2' class = 'form-selector' required>
 				<option value = ''>Выберите второго студента</option>
 				<option value = 'Богорадников Денис'>Богорадников Денис</option>
 				<option value = 'Бувин Алексей'>Бувин Алексей</option>
@@ -66,7 +66,7 @@
 	
 	<div id = 'remove-form' class = 'form'>
 		<form action = '/remove' method = 'post' onsubmit = 'document.getElementById("remove-form-submit-button").style.pointerEvents = "none"'>
-			<select name = 'studentName' class = 'form-selector' id = 'remove-form-student-selector'>
+			<select name = 'studentName' class = 'form-selector' id = 'remove-form-student-selector' required>
 				<option value = ''>Выберите студента</option>
 				<option value = 'Богорадников Денис'>Богорадников Денис</option>
 				<option value = 'Бувин Алексей'>Бувин Алексей</option>
@@ -87,7 +87,7 @@
 				<option value = 'Шкиперов Дмитрий'>Шкиперов Дмитрий</option>
 				<option value = 'Яковлев Сергей'>Яковлев Сергей</option>
 			</select><br>
-			<select name = 'date' class = 'form-selector' id = 'remove-form-date-selector'>
+			<select name = 'date' class = 'form-selector' id = 'remove-form-date-selector' required>
 				<option value = ''>Выберите дату</option>
 			</select><br>
 			<input type = 'submit' id = 'remove-form-submit-button' class = 'submit-button' value = 'Удалить'>
