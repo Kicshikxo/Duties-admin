@@ -293,7 +293,7 @@
 					tr[nameToNumber[i.name]].innerHTML += "<td class = 'mark blank'></td>"
 				}
 				else for (j of i.dates){
-					tr[nameToNumber[i.name]].innerHTML += `<td class = 'mark' value = '${j}'><div><div>${j.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(j.split('.').reverse().join('.')).getDay()]}</small></div></td>`
+					tr[nameToNumber[i.name]].innerHTML += `<td class = 'mark' data-date = '${j}'><div><div>${j.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(j.split('.').reverse().join('.')).getDay()]}</small></div></td>`
 					if (j == `${new Date().getDate()}.${new Date().getMonth()+1}.${new Date().getFullYear()}`) onDutyToday.push(i.name)
 				}
 			}
@@ -301,14 +301,18 @@
 			// Подсчёт прошедних дней (криво)
 			let td = document.querySelectorAll('.mark:not(.blank)')
 			for (i of td) {
-				i.onmousedown = i.ontouchstart = function(){
-					if ((function(){
-						for (j of td)
-							if (j.children[0].children[1].innerText == 'Дней назад'){return false}
-						return true
-					})())
-						this.innerHTML = `<div><div>${~~((new Date() - new Date(this.children[0].children[0].innerHTML.split('.').reverse().join('.') + '.2020'))/86400000)}</div><small>Дней назад</small></div>`
-					else fillTable()
+				i.onclick = function(){
+					console.log('тык')
+					if (this.children[0].children[1].innerText != 'Дней назад') setTimeout(function(){
+						this.innerHTML = `<div><div>${~~((new Date() - new Date(this.dataset.date.split('.').reverse().join('.')))/86400000)}</div><small>Дней назад</small></div>`
+					}.bind(this))
+					
+					for (j of td){
+						if (j.children[0].children[1].innerText == 'Дней назад'){
+							let date = j.dataset.date
+							j.innerHTML = `<div><div>${date.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(date.split('.').reverse().join('.')).getDay()]}</small></div>`
+						}
+					}
 				}
 			}
 			
