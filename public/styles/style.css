@@ -172,7 +172,10 @@ body {
 	}
 	#reload-button {
 		top: 0;
-		right: 42px;
+		right: 42px}
+		#reload-button img {
+			width: 16px;
+			height: 16px;
 	}
 
 #main-block {
