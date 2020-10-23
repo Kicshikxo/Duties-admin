@@ -305,7 +305,6 @@
 					this.innerHTML = `<div><div>${~~((new Date() - new Date(this.children[0].children[0].innerHTML.split('.').reverse().join('.') + '.2020'))/86400000)}</div><small>Дней назад</small></div>`
 					console.log('тык')
 				}
-				i.onmouseup = i.ontouchend = fillTable
 			}
 			
 			if (onDutyToday.length != 0) id('info-block').innerHTML = `Сегодня ${(onDutyToday.length > 1) ? 'дежурят' : 'дежурит'}: ${onDutyToday.join(', ')}`
@@ -336,6 +335,7 @@
 			fillTable()
 			id('form-date').value = `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`
 			setInterval(fillTable, 60000)
+			window.onmouseup = window.ontouchend = fillTable
 			/*setTimeout(function(){
 				id('header').style.transform = 'none'
 			}, 850)*/
