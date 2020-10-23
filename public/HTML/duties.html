@@ -108,7 +108,7 @@
 		<div id = 'table-block'>
 			<div>
 				<div id = 'rating-block'>
-					<table id = 'rating-table' ondblclick = 'fullScreenSwitch()'>
+					<table id = 'rating-table'>
 						<tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
 					</table>
 
@@ -215,7 +215,7 @@
 			for (i of database){
 				if (i.name == this.value){
 					id('remove-form-date-selector').innerHTML = '<option value = "">Выберите дату</option>'
-					for (j of i.dates) id('remove-form-date-selector').innerHTML += `<option value = '${j}'>${j.split('.').slice(0,2).join('.')}</option>`
+					for (j of i.dates) id('remove-form-date-selector').innerHTML += `<option value = '${j}'>${j}</option>`
 				}
 			}
 		}
@@ -285,6 +285,7 @@
 		tr = document.getElementsByTagName('tr')
 		
 		function fillTable(){
+			console.log('new')
 			id('rating-table').innerHTML = '<tr></tr>'.repeat(18)
 			onDutyToday = []
 			for (i of database){
@@ -292,10 +293,21 @@
 					tr[nameToNumber[i.name]].innerHTML += "<td class = 'mark blank'></td>"
 				}
 				else for (j of i.dates){
-					tr[nameToNumber[i.name]].innerHTML += `<td class = 'mark'><div>${j.split('.').slice(0,2).join('.')}<small>${daysToNumber[new Date(j.split('.').reverse().join('.')).getDay()]}</small></div></td>`
+					tr[nameToNumber[i.name]].innerHTML += `<td class = 'mark'><div><div>${j.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(j.split('.').reverse().join('.')).getDay()]}</small></div></td>`
 					if (j == `${new Date().getDate()}.${new Date().getMonth()+1}.${new Date().getFullYear()}`) onDutyToday.push(i.name)
 				}
 			}
+			
+			// Подсчёт прошедних дней (криво)
+			let td = document.querySelectorAll('.mark:not(.blank)')
+			for (i of td) {
+				i.onmousedown = i.ontouchstart = function(){
+					this.innerHTML = `<div><div>${~~((new Date() - new Date(this.children[0].children[0].innerHTML.split('.').reverse().join('.') + '.2020'))/86400000)}</div><small>Дней назад</small></div>`
+					console.log('тык')
+				}
+				i.onmouseup = i.ontouchend = fillTable
+			}
+			
 			if (onDutyToday.length != 0) id('info-block').innerHTML = `Сегодня ${(onDutyToday.length > 1) ? 'дежурят' : 'дежурит'}: ${onDutyToday.join(', ')}`
 			else {
 				lastDate = 0
