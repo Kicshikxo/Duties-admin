@@ -170,6 +170,11 @@ body {
 	#remove-button.opened:after {
 		transform: rotate(-45deg);
 	}
+	#reload-button {
+		top: 0;
+		right: 42px;
+		background: #F00 !important;
+	}
 
 #main-block {
     width: 80vw;
