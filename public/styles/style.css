@@ -170,13 +170,13 @@ body {
 		transform: rotate(-45deg);
 	}
 	#calendar-button {
-		right: 42px;}
+		left: 42px;}
 		#calendar-button img {
 			width: 16px;
 			height: 16px;
 	}
 	#reload-button {
-		left: 42px}
+		right: 42px}
 		#reload-button img {
 			width: 16px;
 			height: 16px;
