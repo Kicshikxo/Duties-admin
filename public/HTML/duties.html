@@ -232,10 +232,8 @@
 		    }
 		}
 		window.onmouseup = function(){
-			fillTable()
 			ratingTable.onmousemove = function(){return}
 		}
-		window.ontouchend = fillTable
 
 		ratingTable.onscroll = function(){
 			id('names-table').scrollTop = ratingTable.scrollTop
@@ -287,7 +285,6 @@
 		tr = document.getElementsByTagName('tr')
 		
 		function fillTable(){
-			console.log('new')
 			id('rating-table').innerHTML = '<tr></tr>'.repeat(18)
 			onDutyToday = []
 			for (i of database){
@@ -304,10 +301,14 @@
 			let td = document.querySelectorAll('.mark:not(.blank)')
 			for (i of td) {
 				i.onmousedown = i.ontouchstart = function(){
-					this.innerHTML = `<div><div>${~~((new Date() - new Date(this.children[0].children[0].innerHTML.split('.').reverse().join('.') + '.2020'))/86400000)}</div><small>Дней назад</small></div>`
-					console.log('тык')
+					if ((function(){
+						for (j of td)
+							if (j.children[0].children[1].innerText == 'Дней назад'){return false}
+						return true
+					})()) 
+						this.innerHTML = `<div><div>${~~((new Date() - new Date(this.children[0].children[0].innerHTML.split('.').reverse().join('.') + '.2020'))/86400000)}</div><small>Дней назад</small></div>`
+					else fillTable()
 				}
-				i.onmouseup = i.ontouchend = fillTable
 			}
 			
 			if (onDutyToday.length != 0) id('info-block').innerHTML = `Сегодня ${(onDutyToday.length > 1) ? 'дежурят' : 'дежурит'}: ${onDutyToday.join(', ')}`
