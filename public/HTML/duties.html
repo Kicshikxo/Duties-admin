@@ -150,6 +150,10 @@
 		
 		function id(id){return document.getElementById(id)}
 		
+		String.prototype.reverseDate = function(){
+			return this.split('.').reverse().join('.')
+		}
+		
 		function toggleAddNewDate(){
 			if (id('add-form').style.transform == 'scale(1)'){
 				id('add-form').style.transform =  'scale(0)'
@@ -294,7 +298,7 @@
 					tr[nameToNumber[i.name]].innerHTML += "<td class = 'mark blank'></td>"
 				}
 				else for (j of i.dates){
-					tr[nameToNumber[i.name]].innerHTML += `<td class = 'mark' data-date = '${j}'><div><div>${j.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(j.split('.').reverse().join('.')).getDay()]}</small></div></td>`
+					tr[nameToNumber[i.name]].innerHTML += `<td class = 'mark' data-date = '${j}'><div><div>${j.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(j.reverseDate()).getDay()]}</small></div></td>`
 					if (j == `${new Date().getDate()}.${new Date().getMonth()+1}.${new Date().getFullYear()}`) onDutyToday.push(i.name)
 				}
 			}
@@ -303,12 +307,12 @@
 			for (i of td) {
 				i.onclick = function(){
 					if (this.children[0].children[1].innerText != 'Дней назад') setTimeout(function(){
-						this.innerHTML = `<div><div>${~~((new Date() - new Date(this.dataset.date.split('.').reverse().join('.')))/86400000)}</div><small>Дней назад</small></div>`
+						this.innerHTML = `<div><div>${~~((new Date() - new Date(this.dataset.date.reverseDate()))/86400000)}</div><small>Дней назад</small></div>`
 					}.bind(this))
 					
 					for (j of td){
 						if (j.children[0].children[1].innerText == 'Дней назад'){
-							j.innerHTML = `<div><div>${j.dataset.date.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(j.dataset.date.split('.').reverse().join('.')).getDay()]}</small></div>`
+							j.innerHTML = `<div><div>${j.dataset.date.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(j.dataset.date.reverseDate()).getDay()]}</small></div>`
 						}
 					}
 				}
@@ -319,7 +323,7 @@
 				lastDate = 0
 				for (i of database){
 					for (j of i.dates){
-						if (new Date(j.split('.').reverse().join('.')) > lastDate) lastDate = new Date(j.split('.').reverse().join('.'))
+						if (new Date(j.reverseDate()) > lastDate) lastDate = new Date(j.reverseDate())
 					}
 				}
 				if (lastDate){
@@ -330,7 +334,7 @@
 							if (j == lastDate) lastDuty.push(i.name)
 						}
 					}
-					if (new Date() < new Date(lastDate.split('.').reverse().join('.')))
+					if (new Date() < new Date(lastDate.reverseDate()))
 						id('info-block').innerHTML = `${(lastDuty.length > 1) ? 'Следующие дежурные' : 'Следующий дежурный'}: ${lastDuty.join(', ')}`
 					else 
 						id('info-block').innerHTML = `Последний раз ${(lastDuty.length > 1) ? 'дежурили' : 'дежурил'}: ${lastDuty.join(', ')}`
@@ -347,11 +351,11 @@
 				return true
 			})())
 				for (i of td){
-					i.innerHTML = `<div><div>${~~((new Date() - new Date(i.dataset.date.split('.').reverse().join('.')))/86400000)}</div><small>Дней назад</small></div>`
+					i.innerHTML = `<div><div>${~~((new Date() - new Date(i.dataset.date.reverseDate()))/86400000)}</div><small>Дней назад</small></div>`
 			}
 			else 
 				for (i of td){
-					i.innerHTML = `<div><div>${i.dataset.date.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(i.dataset.date.split('.').reverse().join('.')).getDay()]}</small></div>`
+					i.innerHTML = `<div><div>${i.dataset.date.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(i.dataset.date.reverseDate()).getDay()]}</small></div>`
 			}
 		}
 		
