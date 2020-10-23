@@ -302,7 +302,7 @@
 			let td = document.querySelectorAll('.mark:not(.blank)')
 			for (i of td) {
 				i.onclick = function(){
-					console.log('тык')
+				
 					if (this.children[0].children[1].innerText != 'Дней назад') setTimeout(function(){
 						this.innerHTML = `<div><div>${~~((new Date() - new Date(this.dataset.date.split('.').reverse().join('.')))/86400000)}</div><small>Дней назад</small></div>`
 					}.bind(this))
