@@ -306,12 +306,12 @@
 			let td = document.querySelectorAll('.mark:not(.blank)')
 			for (i of td) {
 				i.onclick = function(){
-					if (this.children[0].children[1].innerText != 'Дней назад') setTimeout(function(){
-						this.innerHTML = `<div><div>${~~((new Date() - new Date(this.dataset.date.reverseDate()))/86400000)}</div><small>Дней назад</small></div>`
+					if (this.children[0].children[1].innerText != 'дней назад') setTimeout(function(){
+						this.innerHTML = `<div><div>${~~((new Date() - new Date(this.dataset.date.reverseDate()))/86400000)}</div><small>дней назад</small></div>`
 					}.bind(this))
 					
 					for (j of td){
-						if (j.children[0].children[1].innerText == 'Дней назад'){
+						if (j.children[0].children[1].innerText == 'дней назад'){
 							j.innerHTML = `<div><div>${j.dataset.date.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(j.dataset.date.reverseDate()).getDay()]}</small></div>`
 						}
 					}
@@ -351,7 +351,7 @@
 				return true
 			})())
 				for (i of td){
-					i.innerHTML = `<div><div>${~~((new Date() - new Date(i.dataset.date.reverseDate()))/86400000)}</div><small>Дней назад</small></div>`
+					i.innerHTML = `<div><div>${~~((new Date() - new Date(i.dataset.date.reverseDate()))/86400000)}</div><small>дней назад</small></div>`
 			}
 			else 
 				for (i of td){
