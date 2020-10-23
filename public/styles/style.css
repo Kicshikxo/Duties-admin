@@ -173,11 +173,7 @@ body {
 	#reload-button {
 		top: 0;
 		right: 42px}
-		#reload-button:active img{
-			transform: rotate(-360deg)
-		}
 		#reload-button img {
-			transition: .5s;
 			width: 16px;
 			height: 16px;
 	}
