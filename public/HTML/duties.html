@@ -298,8 +298,7 @@
 					if (j == `${new Date().getDate()}.${new Date().getMonth()+1}.${new Date().getFullYear()}`) onDutyToday.push(i.name)
 				}
 			}
-			
-			// Подсчёт прошедних дней
+
 			let td = document.querySelectorAll('.mark:not(.blank)')
 			for (i of td) {
 				i.onclick = function(){
