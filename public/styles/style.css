@@ -334,7 +334,7 @@ body {
     }
 }
 @media (orientation: portrait) {
-	#add-button, #remove-button {
+	#add-button, #remove-button, #calendar-button, #reload-button {
 		display: flex;
 	}
 	
