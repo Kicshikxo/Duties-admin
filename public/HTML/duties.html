@@ -361,10 +361,7 @@
 		
 		window.onload = function(){
 			fillTable()
-			id('form-date').value = `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`
-			/*setTimeout(function(){
-				id('header').style.transform = 'none'
-			}, 850)*/
+			id('form-date').value = `${String(new Date().getFullYear()).padStart(2,0)}-${String(new Date().getMonth()+1).padStart(2,0)}-${String(new Date().getDate()).padStart(2,0)}`
 		}
 
 	</script>
