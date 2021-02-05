@@ -327,7 +327,7 @@
 					}
 				}
 				if (lastDate){
-					lastDate = `${lastDate.getDate()}.${lastDate.getMonth()+1}.${lastDate.getFullYear()}`
+					lastDate = `${String(lastDate.getDate()).padStart(2,0)}.${String(lastDate.getMonth()+1).padStart(2,0)}.${lastDate.getFullYear()}`
 					lastDuty = []
 					for (i of database){
 						for (j of i.dates){
