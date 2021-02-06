@@ -78,7 +78,7 @@ router.get('/*', async function(request, response){
 	response.end('Мобильная версия')
 })
 
-app.use(vhost('www.m.duties-admin.tk', router))
+app.use(vhost('m.duties-admin.tk', router))
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, function(){
