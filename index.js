@@ -1,3 +1,4 @@
+const subdomain = require('express-subdomain')
 const express = require('express')
 const path    = require('path')
 const ejs     = require('ejs')
@@ -68,6 +69,14 @@ app.post("/remove", urlencodedParser, async function (request, response) {
 	else 
 		response.render(__dirname + '/public/HTML/result.html', {text: 'Не удалось удалить'});
 })
+
+const router = express.Router()
+
+router.get('/*', async function (request, response){
+	response.end('Мобильная версия')
+})
+
+app.use(subdomain('m', router))
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, function(){
