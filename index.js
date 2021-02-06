@@ -1,8 +1,11 @@
 const express = require('express')
+const vhost   = require('vhost')
 const path    = require('path')
 const ejs     = require('ejs')
 const bodyParser = require("body-parser")
 const urlencodedParser = bodyParser.urlencoded({extended: false});
+
+// console.log(express.vhost)
 
 const app = express()
 
@@ -68,6 +71,14 @@ app.post("/remove", urlencodedParser, async function (request, response) {
 	else 
 		response.render(__dirname + '/public/HTML/result.html', {text: 'Не удалось удалить'});
 })
+
+const router = express()
+
+router.get('/*', async function(request, response){
+	response.end('Мобильная версия')
+})
+
+app.use(vhost('www.m.duties-admin.tk', router))
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, function(){
