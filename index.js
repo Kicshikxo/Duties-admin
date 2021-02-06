@@ -70,13 +70,20 @@ app.post("/remove", urlencodedParser, async function (request, response) {
 		response.render(__dirname + '/public/HTML/result.html', {text: 'Не удалось удалить'});
 })
 
-const router = express.Router()
+var router = express.Router();
 
-router.get('/*', async function (request, response){
-	response.end('Мобильная версия')
-})
+//api specific routes
+router.get('/', function(req, res) {
+   res.send('Welcome to our API!');
+});
 
-app.use(subdomain('m', router))
+router.get('/users', function(req, res) {
+    res.json([
+        { name: "Brian" }
+    ]);
+});
+
+app.use(subdomain('api', router));
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, function(){
