@@ -30,13 +30,13 @@ function sort(a,b){
 	else return a[0] - b[0]
 }
 
-app.get('/old', async function(request, response){
+app.get('/', async function(request, response){
 	database = await collection.find({}, { projection: { _id: 0}})
 	response.render(__dirname + "/static/HTML/duties_old.html", {database: database})
 	// response.render(__dirname + "/static/HTML/duties_old.html")
 })
 
-app.get('/', async function(request, response){
+app.get('/new', async function(request, response){
 	// database = await collection.find({}, { projection: { _id: 0}})
 	// response.render(__dirname + "/public/HTML/duties.html", {database: database})
 	response.render(__dirname + "/static/HTML/duties.html")
