@@ -193,7 +193,10 @@
 			removeButton.addEventListener('click', toggleRemoveMenu)
 			addButton.addEventListener('click', toggleAddMenu)
 
-			reloadButton.addEventListener('click', () => {location.reload()})
+			reloadButton.addEventListener('click', () => {
+				window.parent.postMessage("","*")
+				location.reload()
+			})
 
 			swal.setDefaults({
 				closeOnEsc: false
