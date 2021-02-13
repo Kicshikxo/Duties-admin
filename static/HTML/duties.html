@@ -193,10 +193,9 @@
 			removeButton.addEventListener('click', toggleRemoveMenu)
 			addButton.addEventListener('click', toggleAddMenu)
 
-			// swal.setDefaults({
-			// 	closeOnClickOutside: false,
-			// 	closeOnEsc: false,
-			// })
+			swal.setDefaults({
+				closeOnEsc: false
+			})
 
 			Noty.overrideDefaults({
 				theme: 'bootstrap-v4',
@@ -214,20 +213,20 @@
 			socket.emit('get db request')
 		}
 
-		// datesTable.onmousedown = function(){
-		// 	startX = this.scrollLeft + event.pageX
-		//     startY = this.scrollTop  + event.pageY
-		//     datesTable.onmousemove = function(){
-		//     	this.scrollLeft = startX - event.pageX
-		//         this.scrollTop  = startY - event.pageY
-		//         namesTable.scrollTop = this.scrollTop
-		//         return false
-		//     }
-		// }
+		datesTable.onmousedown = function(){
+			startX = this.scrollLeft + event.pageX
+		    startY = this.scrollTop  + event.pageY
+		    datesTable.onmousemove = function(){
+		    	this.scrollLeft = startX - event.pageX
+		        this.scrollTop  = startY - event.pageY
+		        namesTable.scrollTop = this.scrollTop
+		        return false
+		    }
+		}
 
-		// window.onmouseup = function(){
-		// 	datesTable.onmousemove = function(){return}
-		// }
+		window.onmouseup = function(){
+			datesTable.onmousemove = function(){return}
+		}
 
 		datesTable.onscroll = function(){
 			namesTable.scrollTop = datesTable.scrollTop
