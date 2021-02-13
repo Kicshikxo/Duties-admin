@@ -243,7 +243,6 @@
 			socket.on('get db response', function(data){
 				console.log(data.db)
 				new Noty({type: 'success', text: 'Загрузилось'}).show()
-				database = data.db
 				fillTable(data.db)
 				query('.main-table').classList.remove('hidden')
 			})
@@ -306,7 +305,8 @@
 			6: 'суббота'
 		}
 
-		function fillTable(database){
+		function fillTable(db){
+			database = db
 			datesTable.innerHTML = `<tr class = 'date-row'></tr>`.repeat(18)
 
 			for (student of database){
