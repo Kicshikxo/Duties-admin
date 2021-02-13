@@ -174,12 +174,13 @@ body {
 				text-align: left
 			}
 
-				.names-table .student-row:first-child .student-cell{
+				.names-table .student-row:first-child .student-cell {
 					border-top: none;
 				}
 
-				.names-table .student-row:last-child .student-cell{
-					border-bottom: none;
+				.names-table .student-row:last-child .student-cell {
+					/*border-bottom: none;*/
+					margin-bottom: -2px;
 				}
 
 		.dates-table {
@@ -203,7 +204,8 @@ body {
 				}
 
 				.dates-table .date-row:last-child .date-cell {
-					border-bottom: none;
+					/*border-bottom: none;*/
+					margin-bottom: -2px;
 				}
 
 .swal-modal {
@@ -244,4 +246,9 @@ body {
 
 .noty_body {
 	color: var(--main-bg-color);
+}
+
+::-webkit-scrollbar {
+	width: 0;
+	height: 0;
 }
