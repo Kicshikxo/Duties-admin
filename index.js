@@ -1,24 +1,25 @@
 const express = require('express')
-const path    = require('path')
-const ejs     = require('ejs')
+const compression = require('compression')
+const app = express()
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
+const ejs = require('ejs')
+const path = require('path')
 const bodyParser = require("body-parser")
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-// console.log(express.vhost)
+app.use(compression())
 
-const app = express()
+app.use('/styles',express.static(__dirname + '/static/styles'))
+app.use('/img',express.static(__dirname + '/static/styles/img'))
+app.use('/js',express.static(__dirname + '/static/js'))
 
-app.use('/styles',express.static(__dirname + '/public/styles'));
-app.use('/styles/img',express.static(__dirname + '/public/styles/img'));
-app.use('/scripts',express.static(__dirname + '/public/scripts'));
-app.use('/img',express.static(__dirname + '/public/img'));
+app.engine('html', ejs.renderFile)
+app.set('view engine', 'html')
+app.set('views', __dirname)
 
-app.engine('html', ejs.renderFile);
-app.set('view engine', 'html');
-app.set('views', __dirname);
-
-uri = 'mongodb+srv://Kicshikxo:ua3wikqwe@cluster0-8humy.gcp.mongodb.net/Duties'
-db = require('monk')(uri)
+url = 'mongodb+srv://Kicshikxo:ua3wikqwe@cluster0-8humy.gcp.mongodb.net/Duties'
+db = require('monk')(url)
 collection = db.get('Duties')
 
 function sort(a,b){
@@ -31,10 +32,67 @@ function sort(a,b){
 
 app.get('/*', async function(request, response){
 	database = await collection.find({}, { projection: { _id: 0}})
-	response.render(__dirname + "/public/HTML/duties.html", {database: database})
+	response.render(__dirname + "/static/HTML/duties_old.html", {database: database})
+	// response.render(__dirname + "/static/HTML/duties_old.html")
 })
 
-app.post("/add", urlencodedParser, async function (request, response) {
+app.get('/new/*', async function(request, response){
+	// database = await collection.find({}, { projection: { _id: 0}})
+	// response.render(__dirname + "/public/HTML/duties.html", {database: database})
+	response.render(__dirname + "/static/HTML/duties.html")
+})
+
+async function getDB(){
+	return await collection.find({}, { projection: { _id: 0}})
+}
+
+app.post("/add", urlencodedParser, add)
+
+app.post("/mobile/add", urlencodedParser, add)
+
+app.post("/remove", urlencodedParser, remove)
+
+app.post("/mobile/remove", urlencodedParser, remove)
+
+io.on('connection', async function(socket){
+	console.log(`Подключился: ${socket.id}`)
+
+	socket.on('get db request', async function(){
+		socket.emit('get db response', {db: await getDB()})
+	})
+
+	socket.on('add request', async function(data){
+		console.log(`Получено: ${data.student1}, ${data.student2}`)
+		if (data.student1 || data.student2){
+			socket.emit('add response', {appended: true, title: 'Успешно добавлено', text: ''})
+		}
+		else if (!data.student1 && !data.student2){
+			socket.emit('add response', {appended: false, title: 'Не удалось добавить', text: 'Ни один студент не выбран'})
+		}
+	})
+
+	socket.on('remove request', async function(data){
+		console.log(`Получено: ${data.student}, ${data.date}`)
+		if (data.student && data.date){
+			socket.emit('remove response', {appended: true, title: 'Успешно удалено', text: ''})
+		}
+		else if (data.student && !data.date){
+			socket.emit('remove response', {appended: false, title: 'Не удалось удалить', text: 'Не выбрана дата'})
+		}
+		else if (!data.student && data.date){
+			socket.emit('remove response', {appended: false, title: 'Не удалось удалить', text: 'Не выбран студент'})
+		}
+		else if (!data.student && !data.date){
+			socket.emit('remove response', {appended: false, title: 'Не удалось удалить', text: 'Ничего не выбрано'})
+		}
+	})
+
+	socket.on('disconnect', function(){
+		console.log(`Отключился: ${socket.id}`)
+	})
+})
+
+async function add(request, response) {
 	database = await collection.find({}, { projection: { _id: 0}})
 	var student1, student2
 	for (i of database){
@@ -49,13 +107,13 @@ app.post("/add", urlencodedParser, async function (request, response) {
 			await collection.update({name: student1.name}, {$set: {dates: student1.dates.concat(selectedDate).sort(sort)}})
 		if (student2) 
 			await collection.update({name: student2.name}, {$set: {dates: student2.dates.concat(selectedDate).sort(sort)}})
-		response.render(__dirname + '/public/HTML/result.html', {text: 'Успешно добавлено'})
+		response.render(__dirname + '/static/HTML/result.html', {text: 'Успешно добавлено'})
 	}
 	else
-		response.render(__dirname + '/public/HTML/result.html', {text: 'Не добавлено'});
-})
+		response.render(__dirname + '/static/HTML/result.html', {text: 'Не добавлено'});
+}
 
-app.post("/remove", urlencodedParser, async function (request, response) {
+async function remove(request, response) {
 	database = await collection.find({}, { projection: { _id: 0}})
 	var student
 	for (i of database){
@@ -65,13 +123,13 @@ app.post("/remove", urlencodedParser, async function (request, response) {
 	if (student && student.dates.indexOf(request.body.date) != -1) {
 		student.dates.splice(student.dates.indexOf(request.body.date), 1)
 		await collection.update({name: student.name}, {$set: {dates: student.dates}})
-		response.render(__dirname + '/public/HTML/result.html', {text: 'Успешно удалено'});
+		response.render(__dirname + '/static/HTML/result.html', {text: 'Успешно удалено'});
 	}
 	else 
-		response.render(__dirname + '/public/HTML/result.html', {text: 'Не удалось удалить'});
-})
+		response.render(__dirname + '/static/HTML/result.html', {text: 'Не удалось удалить'});
+}
 
 const PORT = process.env.PORT || 3000
-app.listen(PORT, function(){
-	console.log(`Server has been started on ${PORT}...`)
+server.listen(PORT, function (){
+	console.log(`Server started on port: ${PORT}`)
 })

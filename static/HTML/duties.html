@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta name = 'viewport' content = 'width = device-width, initial-scale = 1, maximum-scale = 1, minimum-scale = 1, user-scalable = no, minimal-ui, shrink-to-fit=no'>
+	<meta charset = 'UTF-8'>
+	<meta name = 'full-screen' content = 'yes'>
+	<meta http-equiv = 'X-UA-Compatible' content = 'ie=edge'>
+	<link rel = 'stylesheet' href = '/styles/bootstrap.min.css'>
+	<link rel = 'stylesheet' href = '/styles/style.css'>
+	<link rel = 'stylesheet' href = '/styles/noty.css'>
+	<title>Морской бой</title>
+
+	<link rel = 'preload' href = '/styles/fonts/CenturyGothic.ttf' as = 'font' crossorigin>
+
+	<!-- <link rel = 'shortcut icon' href = '/img/favicon.svg'> -->
+</head>
+<body class = 'bg-second'>
+
+	<div id = 'header' class = 'd-flex justify-content-between flex-md-row align-items-center p-3 px-md-4 mb-3 bg-main shadow-sm'>
+		<button id = 'remove-button'   class = 'header-button'></button>
+		<button id = 'calendar-button' class = 'header-button'></button>
+		<h4 id = 'header-title'        class = 'mr-md-auto'>Дежурства</h4>
+		<button id = 'reload-button'   class = 'header-button'></button>
+		<button id = 'add-button'      class = 'header-button'></button>
+		<!-- <nav class = 'my-2 my-md-0 mr-md-3'>
+
+		</nav> -->
+		<!-- <a class = 'btn btn-outline-primary' href = '/create'>Новая комната</a> -->
+	</div>
+
+	<script src = '/socket.io/socket.io.js'></script>
+	<script src = '/js/jquery-1.8.3.min.js'></script>
+
+	<script>
+		const socket = io()
+
+		query = (query) => document.querySelector(query)
+		queryAll = (query) => document.querySelectorAll(query)
+
+		let removeButton   = query('#remove-button')
+		let calendarButton = query('#calendar-button')
+		let reloadButton   = query('#reload-button')
+		let addButton      = query('#add-button')
+
+		const studentsListTemplate = $(`
+		<select id = 'students-list-template' class = 'form-select bg-main border-main mb-4'>
+			<option value = ''>Выберите студента</option>
+			<option value = 'Богорадников Денис'>Богорадников Денис</option>
+			<option value = 'Бувин Алексей'>Бувин Алексей</option>
+			<option value = 'Дрюченко Артём'>Дрюченко Артём</option>
+			<option value = 'Заживихин Дмитрий'>Заживихин Дмитрий</option>
+			<option value = 'Кривдин Сергей'>Кривдин Сергей</option>
+			<option value = 'Крючкин Данил'>Крючкин Данил</option>
+			<option value = 'Кузнецов Валерий'>Кузнецов Валерий</option>
+			<option value = 'Маховицкий Владимир'>Маховицкий Владимир</option>
+			<option value = 'Машнин Владислав'>Машнин Владислав</option>
+			<option value = 'Озеров Роман'>Озеров Роман</option>
+			<option value = 'Полыновский Дмитрий'>Полыновский Дмитрий</option>
+			<option value = 'Скорятин Игорь'>Скорятин Игорь</option>
+			<option value = 'Спицын Денис'>Спицын Денис</option>
+			<option value = 'Тярин Богдан'>Тярин Богдан</option>
+			<option value = 'Фурсин Владислав'>Фурсин Владислав</option>
+			<option value = 'Шевченко Богдан'>Шевченко Богдан</option>
+			<option value = 'Шкиперов Дмитрий'>Шкиперов Дмитрий</option>
+			<option value = 'Яковлев Сергей'>Яковлев Сергей</option>
+		</select>`)[0]
+
+		function toggleRemoveMenu(){
+			let content = document.createElement('div')
+
+			content.appendChild(studentsListTemplate.cloneNode(true))
+
+			content.appendChild(studentsListTemplate.cloneNode(false))
+
+			swal({
+				title: 'Удалить дежурство',
+				content: content,
+				button: {
+					text: 'Удалить',
+					closeModal: false
+				}
+			}).then((click)=>{
+				if (click){
+					socket.emit('remove request', {
+						student: (content.children[0] || {}).value, 
+						date: (content.children[1] || {}).value})
+				}
+				else {
+					removeButton.classList.remove('opened')
+				}
+			})
+
+			removeButton.classList.add('opened')
+		}
+
+		socket.on('remove response', function(data){
+			swal({
+				icon: (data.appended) ? 'success' : 'error',
+				title: data.title,
+				text: data.text
+			}).then(()=>{
+				removeButton.classList.remove('opened')
+			})
+		})
+
+		function toggleAddMenu(){
+
+			let content = document.createElement('div')
+
+			content.appendChild(studentsListTemplate.cloneNode(true))
+			content.appendChild(studentsListTemplate.cloneNode(true))
+
+			let dateSelector = document.createElement('input')
+			dateSelector.className = 'bg-main border-main'
+			dateSelector.type = 'date'
+			dateSelector.value = new Date()
+			content.appendChild(dateSelector)
+
+			swal({
+				title: 'Добавить дежурство',
+				content: content,
+				button: {
+					text: 'Добавить',
+					closeModal: false
+				}
+			}).then((click)=>{
+				if (click){
+					socket.emit('add request', {
+						student1: (content.children[0] || {}).value, 
+						student2: (content.children[1] || {}).value, 
+						date: (content.children[2] || {}).value
+					})
+				}
+				else {
+					addButton.classList.remove('opened')
+				}
+			})
+
+			addButton.classList.add('opened')
+		}
+
+		socket.on('add response', function(data){
+			swal({
+				icon: (data.appended) ? 'success' : 'error',
+				title: data.title,
+				text: data.text
+			}).then(()=>{
+				addButton.classList.remove('opened')
+			})
+		})
+
+		function init(){
+
+			removeButton.addEventListener('click', toggleRemoveMenu)
+			addButton.addEventListener('click', toggleAddMenu)
+
+			// swal.setDefaults({
+			// 	closeOnClickOutside: false,
+			// 	closeOnEsc: false,
+			// })
+
+			Noty.overrideDefaults({
+				theme: 'bootstrap-v4',
+				layout: 'bottomRight',
+				timeout: 3000,
+				progressBar: true
+			})
+
+			new Noty({type: 'success', text: 'Загрузилось'}).show()
+		}
+
+		window.onload = init
+	</script>
+
+	<script src = '/js/noty.min.js' defer></script>
+	<script src = '/js/sweetalert.min.js' defer></script>
+ 	
+</body>
+</html> 

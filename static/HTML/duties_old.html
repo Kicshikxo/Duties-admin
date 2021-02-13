@@ -9,7 +9,7 @@
  	<link rel = 'shortcut icon' href = 'styles/img/favicon.ico' type = 'image/x-icon'>
  	<link rel = 'alternate' href = 'styles/img/favicon.ico'>
  	<title>Дежурства</title>
- 	<link rel="stylesheet" type="text/css" href="styles/style.css" />
+ 	<link rel="stylesheet" type="text/css" href="styles/style_old.css" />
 	<script>database = JSON.parse('<%-JSON.stringify(database) %>')</script>
  </head>
 
@@ -97,7 +97,7 @@
 	<header id = 'header'>
 		<div id = 'header-title'>Дежурства</div>
 		<button id = 'remove-button' onclick = 'toggleRemoveDate()'></button>
-		<button id = 'calendar-button' onclick = 'showDaysSpent()'><img src = '../styles/img/calendar-1.png'></button>
+		<button id = 'calendar-button' onclick = 'showDaysSpent()'><img src = '../styles/img/calendar.png'></button>
 		<button id = 'reload-button' onclick = 'window.parent.postMessage("","*"); window.location.reload()'><img src = '../styles/img/reload.png'></button>
 		<button id = 'add-button'    onclick = 'toggleAddNewDate()'></button>
 	</header>

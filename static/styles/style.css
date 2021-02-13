@@ -1,0 +1,142 @@
+@font-face{
+	font-family: 'CenturyGothic';
+	src: url('/styles/fonts/CenturyGothic.ttf');
+}
+
+:root {
+	--main-bg-color: #222831;
+	--second-bg-color: #393e46;
+	--main-color: #00adb5;
+	--main-text-color: #EEE;
+}
+
+* {
+    font-family: 'CenturyGothic' !important;
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    -webkit-user-select: none;
+    text-decoration: none;
+    text-align: center;
+
+    color: var(--main-text-color);
+
+    /*outline: none !important;*/
+	-webkit-tap-highlight-color: #0000;
+}
+
+*:focus {
+	box-shadow: none !important
+}
+
+.bg-main {
+	background-color: var(--main-bg-color);
+}
+
+.bg-second {
+	background-color: var(--second-bg-color);
+}
+
+.border-main {
+	border-color: #34383e !important;
+}
+
+select {
+	background: var(--main-bg-color);
+}
+
+select.form-select {
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23eeeeee' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+	color: var(--main-text-color);
+}
+
+#header {
+	/*border-bottom-right-radius: 10px;*/
+    /*border-bottom-left-radius: 10px;*/
+    height: 56px;
+}
+
+	#header #header-title {
+		font-size: 24px;
+		margin-bottom: .25rem;
+	}
+
+	#header .header-button {
+		width: 32px;
+		height: 32px;
+		/*background: red;*/
+		background: transparent;
+		border: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	#header .header-button:after {
+		content: '';
+		width: 16px;
+		height: 16px;
+		position: absolute;
+		background-size: cover !important;
+	}
+
+		#header .header-button#reload-button:after {
+			background: url('/img/reload.png');
+		}
+
+		#header .header-button#calendar-button:after {
+			background: url('/img/calendar.png');
+		}
+
+		#header .header-button#remove-button,
+		#header .header-button#add-button {
+			position: relative;
+		}
+
+		#header .header-button#remove-button:before,
+		#header .header-button#remove-button:after,
+		#header .header-button#add-button:before,
+		#header .header-button#add-button:after {
+			position: absolute;
+			content: '';
+			width: 16px;
+			height: 2px;
+			background: var(--main-text-color);
+			transition: .3s transform
+		}
+
+		#header .header-button#remove-button.opened:before {transform: rotate(-45deg)}
+		#header .header-button#remove-button.opened:after {transform: rotate(45deg)}
+
+		#header .header-button#add-button:before {transform: rotate(0deg)}
+		#header .header-button#add-button:after {transform: rotate(90deg)}
+
+		#header .header-button#add-button.opened:before {transform: rotate(-45deg)}
+		#header .header-button#add-button.opened:after {transform: rotate(45deg)}
+
+
+.swal-modal {
+	background-color: #14181D;
+	color: var(--main-text-color);
+	/*border: 3px solid white;*/
+}
+
+.swal-title {
+	color: var(--main-text-color);
+}
+
+.swal-text {
+	color: var(--main-text-color);
+}
+
+.swal-icon--success:before, 
+.swal-icon--success:after,
+.swal-icon--success__hide-corners {
+	background: none;
+}
+
+.noty_body {
+	color: var(--main-bg-color);
+}
