@@ -233,27 +233,6 @@
 			}
 		}
 
-		// nameToNumber = {
-		// 	'Богорадников Денис': 0,
-		// 	'Бувин Алексей': 1,
-		// 	'Дрюченко Артём': 2,
-		// 	'Заживихин Дмитрий': 3,
-		// 	'Кривдин Сергей': 4,
-		// 	'Крючкин Данил': 5,
-		// 	'Кузнецов Валерий': 6,
-		// 	'Маховицкий Владимир': 7,
-		// 	'Машнин Владислав': 8,
-		// 	'Озеров Роман': 9,
-		// 	'Полыновский Дмитрий': 10,
-		// 	'Скорятин Игорь': 11,
-		// 	'Спицын Денис': 12,
-		// 	'Тярин Богдан': 13,
-		// 	'Фурсин Владислав': 14,
-		// 	'Шевченко Богдан': 15,
-		// 	'Шкиперов Дмитрий': 16,
-		// 	'Яковлев Сергей': 17
-		// }
-
 		studentsIndexes = {
 			'Богорадников Денис': 1,
 			'Бувин Алексей': 2,
@@ -275,6 +254,16 @@
 			'Яковлев Сергей': 18
 		}
 
+		daysToNumber = {
+			0: 'воскресенье',
+			1: 'понедельник',
+			2: 'вторник',
+			3: 'среда',
+			4: 'четверг',
+			5: 'пятница',
+			6: 'суббота'
+		}
+
 		function fillTable(database){
 			datesTable.innerHTML = `<tr class = 'date-row'></tr>`.repeat(18)
 
@@ -284,7 +273,13 @@
 					// tr[nameToNumber[student.name]].innerHTML += `<td class = 'cell empty'></td>`
 				}
 				else for (date of student.dates){
-					query(`.dates-table .date-row:nth-child(${studentsIndexes[student.name]})`).innerHTML += `<td class = 'cell date-cell'>${date.split('.').slice(0,2).join('.')}</td>`
+					query(`.dates-table .date-row:nth-child(${studentsIndexes[student.name]})`).innerHTML += `
+						<td class = 'cell date-cell' data-date = '${date}'>
+							<div class = 'inner'>
+								<div>${date.split('.').slice(0,2).join('.')}</div>
+								<small>${daysToNumber[new Date(date.reverseDate()).getDay()]}</small>
+							<div>
+						</td>`
 					// tr[nameToNumber[student.name]].innerHTML += `<td class = 'mark' data-date = '${j}'><div><div>${j.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(j.reverseDate()).getDay()]}</small></div></td>`
 					// if (j == `${new Date().getDate()}.${new Date().getMonth()+1}.${new Date().getFullYear()}`) onDutyToday.push(student.name)
 				}

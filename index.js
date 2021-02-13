@@ -25,9 +25,12 @@ collection = db.get('Duties')
 function sort(a,b){
 	a = a.split('.')
 	b = b.split('.')
-	if (a[2] != b[2]) return a[2] - b[2]
-	if (a[1] != b[1]) return a[1] - b[1]
-	else return a[0] - b[0]
+	if (a[2] != b[2]) 
+		return a[2] - b[2]
+	if (a[1] != b[1]) 
+		return a[1] - b[1]
+	else 
+		return a[0] - b[0]
 }
 
 app.get('/', async function(request, response){

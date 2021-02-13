@@ -17,7 +17,7 @@
 	--student-cell-width: 96px;
 	--student-cell-height: 46px;
 
-	--date-cell-width: 64px;
+	--date-cell-width: 72px;
 	--date-cell-height: 46px;
 
 	--header-height: 56px;
@@ -54,6 +54,12 @@
 
 .border-main {
 	border-color: var(--main-border-color) !important;
+}
+
+small {
+    font-size: .6em;
+	white-space: nowrap;
+    color: var(--main-color);
 }
 
 table {
@@ -197,8 +203,12 @@ body {
 			.dates-table .date-row .date-cell{
 				min-width: var(--date-cell-width);
 				width: var(--date-cell-width);
+				max-width: var(--date-cell-width);
+
 				min-height: var(--date-cell-height);
 				height: var(--date-cell-height);
+				max-height: var(--date-cell-height);
+
 				border: 2px solid var(--main-bg-color);
 				border-left: none;
 			}
@@ -212,6 +222,12 @@ body {
 					/*margin-bottom: -2px;*/
 				}
 
+	.cell .inner {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column
+	}
 
 	.cell.empty {
 		border: none !important;
