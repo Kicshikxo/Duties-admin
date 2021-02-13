@@ -216,6 +216,7 @@ body {
 		.names-table {
 			width: var(--student-cell-width);
             overflow: hidden;
+            will-change: scroll-position;
             transition: .5s opacity;
 		}
 
@@ -234,8 +235,8 @@ body {
 
 		.dates-table {
 			width: calc(100% - var(--student-cell-width) + 5px);
-			overflow-x: scroll;
-			overflow-y: scroll;
+			overflow: scroll;
+			will-change: scroll-position;
 			transition: .5s opacity;
 		}
 
