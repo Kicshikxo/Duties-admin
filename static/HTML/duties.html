@@ -20,7 +20,7 @@
 </head>
 <body class = 'bg-second'>
 
-	<div style = 'position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;pointer-events: none;z-index: 100;'></div>
+	<!-- <div style = 'position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;pointer-events: none;z-index: 100;'></div> -->
 
 	<div id = 'header' class = 'd-flex justify-content-between flex-md-row align-items-center p-3 px-md-4 bg-main shadow-sm'>
 		<button id = 'remove-button'   class = 'header-button'></button>
@@ -212,7 +212,7 @@
 		// swal()
 		// setTimeout(function(){
 		// 	swal.close()
-		// }, 200)
+		// })
 
 		function init(){
 
@@ -253,9 +253,9 @@
 			socket.emit('get db request')
 		}
 
-		datesTable.onmousedown = function(){
-			startX = this.scrollLeft + event.pageX
-		    startY = this.scrollTop  + event.pageY
+		datesTable.onmousedown = function(event){
+			let startX = this.scrollLeft + event.pageX
+		    let startY = this.scrollTop  + event.pageY
 		    datesTable.onmousemove = function(){
 		    	this.scrollLeft = startX - event.pageX
 		        this.scrollTop  = startY - event.pageY
@@ -264,11 +264,13 @@
 		    }
 		}
 
-		window.onmouseup = function(){
+		window.onmouseup = function(e){
+			e.preventDefault()
 			datesTable.onmousemove = function(){return}
 		}
 
-		datesTable.onscroll = function(){
+		datesTable.onscroll = function(e){
+			e.preventDefault()
 			namesTable.scrollTop = datesTable.scrollTop
 		}
 
