@@ -212,6 +212,12 @@ body {
 					/*margin-bottom: -2px;*/
 				}
 
+
+	.cell.empty {
+		border: none !important;
+		opacity: 0
+	}
+
 .swal-modal {
 	/*background-color: var(--main-bg-color);*/
 	background-color: var(--swal-bg);
