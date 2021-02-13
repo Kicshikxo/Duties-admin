@@ -64,26 +64,26 @@ io.on('connection', async function(socket){
 	socket.on('add request', async function(data){
 		console.log(`Получено: ${data.student1}, ${data.student2}`)
 		if (data.student1 || data.student2){
-			socket.emit('add response', {appended: true, title: 'Успешно добавлено', text: ''})
+			socket.emit('add response', {success: true, title: 'Успешно добавлено', text: ''})
 		}
 		else if (!data.student1 && !data.student2){
-			socket.emit('add response', {appended: false, title: 'Не удалось добавить', text: 'Ни один студент не выбран'})
+			socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Ни один студент не выбран'})
 		}
 	})
 
 	socket.on('remove request', async function(data){
 		console.log(`Получено: ${data.student}, ${data.date}`)
 		if (data.student && data.date){
-			socket.emit('remove response', {appended: true, title: 'Успешно удалено', text: ''})
+			socket.emit('remove response', {success: true, title: 'Успешно удалено', text: ''})
 		}
 		else if (data.student && !data.date){
-			socket.emit('remove response', {appended: false, title: 'Не удалось удалить', text: 'Не выбрана дата'})
+			socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Не выбрана дата'})
 		}
 		else if (!data.student && data.date){
-			socket.emit('remove response', {appended: false, title: 'Не удалось удалить', text: 'Не выбран студент'})
+			socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Не выбран студент'})
 		}
 		else if (!data.student && !data.date){
-			socket.emit('remove response', {appended: false, title: 'Не удалось удалить', text: 'Ничего не выбрано'})
+			socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Ничего не выбрано'})
 		}
 	})
 
