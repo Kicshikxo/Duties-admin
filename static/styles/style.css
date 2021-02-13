@@ -183,13 +183,16 @@ body {
 				}
 
 		.dates-table {
-			width: calc(100% - var(--student-cell-width) + 2px);
+			width: calc(100% - var(--student-cell-width) + 4px);
 			height: 100%;
-			overflow: scroll;
+			overflow-x: scroll;
+			overflow-y: scroll;
 		}
 
 			.dates-table .date-row .date-cell{
+				min-width: var(--date-cell-width);
 				width: var(--date-cell-width);
+				min-height: var(--date-cell-height);
 				height: var(--date-cell-height);
 				border: 2px solid var(--main-bg-color);
 				border-left: none;
