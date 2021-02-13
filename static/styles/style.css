@@ -10,6 +10,7 @@
 	--main-text-color: #EEE;
 
 	--main-border-color: #34383e;
+	--second-border-color: #14181D;
 
 	--student-cell-width: 96px;
 	--student-cell-height: 46px;
@@ -210,11 +211,13 @@ body {
 				}
 
 .swal-modal {
-	background-color: var(--main-bg-color);
+	/*background-color: var(--main-bg-color);*/
+	background-color: #22252A;
 	/*background-color: #14181D;*/
 	color: var(--main-text-color);
 	/*border: 3px solid white;*/
 	margin-top: var(--header-height);
+	border: 2px solid var(--second-border-color);
 }
 
 .swal-title {
