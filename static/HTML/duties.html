@@ -115,7 +115,7 @@
 
 			dateSelector.className = 'bg-second border-main'
 			dateSelector.type = 'date'
-			dateSelector.value = new Date()
+			dateSelector.value = `${String(new Date().getFullYear()).padStart(2,0)}-${String(new Date().getMonth()+1).padStart(2,0)}-${String(new Date().getDate()).padStart(2,0)}`
 
 			content.appendChild(dateSelector)
 
