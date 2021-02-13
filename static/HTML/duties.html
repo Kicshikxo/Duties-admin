@@ -253,12 +253,14 @@
 			socket.emit('get db request')
 		}
 
-		datesTable.onmousedown = function(event){
-			let startX = this.scrollLeft + event.pageX
-		    let startY = this.scrollTop  + event.pageY
-		    datesTable.onmousemove = function(){
-		    	this.scrollLeft = startX - event.pageX
-		        this.scrollTop  = startY - event.pageY
+		datesTable.onmousedown = function(e){
+			e.preventDefault()
+			let startX = this.scrollLeft + e.pageX
+		    let startY = this.scrollTop  + e.pageY
+		    datesTable.onmousemove = function(e){
+		    	e.preventDefault()
+		    	this.scrollLeft = startX - e.pageX
+		        this.scrollTop  = startY - e.pageY
 		        namesTable.scrollTop = this.scrollTop
 		        return false
 		    }
