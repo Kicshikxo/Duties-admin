@@ -256,11 +256,10 @@
 				progressBar: true
 			})
 
-			new Noty({type: 'success', text: 'Загрузилось'}).show()
-
 			socket.on('get db response', function(data){
 				console.log(data.db)
 				fillTable(data.db)
+				new Noty({type: 'success', text: 'Загрузилось'}).show()
 			})
 
 			socket.emit('get db request')
