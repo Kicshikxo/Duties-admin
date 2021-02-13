@@ -112,7 +112,7 @@ io.on('connection', async function(socket){
 			}
 
 			if (currentStudent && currentStudent.dates.includes(data.date)){
-				currentStudent.dates.splice(currentStudent.dates.indexOf(request.body.date), 1)
+				currentStudent.dates.splice(currentStudent.dates.indexOf(data.date), 1)
 				await collection.update({name: currentStudent.name}, {$set: {dates: currentStudent.dates}})
 
 				socket.emit('remove response', {success: true, title: 'Успешно удалено', text: ''})
