@@ -65,7 +65,6 @@ io.on('connection', async function(socket){
 	})
 
 	socket.on('add request', async function(data){
-		console.log(`Получено: ${data.student1}, ${data.student2}, ${data.date}`)
 		if (data.date){
 			if (data.student1 || data.student2){
 
@@ -103,7 +102,6 @@ io.on('connection', async function(socket){
 	})
 
 	socket.on('remove request', async function(data){
-		console.log(`Получено: ${data.student}, ${data.date}`)
 		if (data.student && data.date){
 
 			database = await collection.find({}, {projection: {_id: 0}})
