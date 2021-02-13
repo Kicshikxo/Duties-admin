@@ -308,6 +308,10 @@ body {
     animation: none !important;
 }
 
+.swal-button {
+	background-color: var(--main-color) 
+}
+
 .swal-overlay {
     background: linear-gradient(to bottom, #0000 0px, #0000 var(--header-height), #0006 var(--header-height), #0006 100% );
 }
