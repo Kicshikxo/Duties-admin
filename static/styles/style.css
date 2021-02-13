@@ -255,7 +255,7 @@ body {
 				.dates-table .date-row:first-child .date-cell {border-top: none}
 				.dates-table .date-row:last-child .date-cell {border-bottom: none}
 
-			.dates-table .date-cell .inner {transition: .3s opacity;}
+			.dates-table .date-cell .inner {transition: .3s opacity linear}
 			.dates-table .date-cell .inner.days-passed {opacity: 0}
 			.dates-table .date-cell.show-past-days .inner.days-passed {opacity: 1}
 			.dates-table .date-cell.show-past-days .inner.date {opacity: 0}
