@@ -34,7 +34,7 @@ function sort(a,b){
 }
 
 app.get('/', async function(request, response){
-	database = await collection.find({}, { projection: { _id: 0}})
+	database = await collection.find({}, {projection: {_id: 0}})
 	response.render(__dirname + "/static/HTML/duties_old.html", {database: database})
 	// response.render(__dirname + "/static/HTML/duties_old.html")
 })
@@ -46,7 +46,7 @@ app.get('/new', async function(request, response){
 })
 
 async function getDB(){
-	return await collection.find({}, { projection: { _id: 0}})
+	return await collection.find({}, {projection: {_id: 0}})
 }
 
 app.post("/add", urlencodedParser, add)
@@ -65,21 +65,62 @@ io.on('connection', async function(socket){
 	})
 
 	socket.on('add request', async function(data){
-		console.log(`Получено: ${data.student1}, ${data.student2}`)
-		if (data.student1 || data.student2){
-			socket.emit('add response', {success: true, title: 'Успешно добавлено', text: ''})
-			socket.broadcast.emit('update db', {db: [], socketId: socket.id})
+		console.log(`Получено: ${data.student1}, ${data.student2}, ${data.date}`)
+		if (data.date){
+			if (data.currentStudent1 || data.currentStudent2){
+
+				database = await collection.find({}, {projection: {_id: 0}})
+
+				let currentStudent1, currentStudent2
+				for (let student of database){
+					if (student.name == data.currentStudent1)
+						currentStudent1 = student
+					else if (student.name == data.currentStudent2)
+						currentStudent2 = student
+				}
+
+				if (currentStudent1 || currentStudent2){
+					let date = data.date.split('-').reverse().join('.')
+				    if (currentStudent1)
+						await collection.update({name: currentStudent1.name}, {$set: {dates: currentStudent1.dates.concat(date).sort(sort)}})
+					if (currentStudent2)
+						await collection.update({name: currentStudent2.name}, {$set: {dates: currentStudent2.dates.concat(date).sort(sort)}})
+
+					socket.emit('add response', {success: true, title: 'Успешно добавлено', text: ''})
+					io.emit('update db', {db: await collection.find({}, {projection: { _id: 0}})})
+				}
+			}
+			else if (!data.currentStudent1 && !data.currentStudent2){
+				socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Ни один студент не выбран'})
+			}
 		}
-		else if (!data.student1 && !data.student2){
-			socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Ни один студент не выбран'})
+		else {
+			socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Не указана дата'})
 		}
 	})
 
 	socket.on('remove request', async function(data){
 		console.log(`Получено: ${data.student}, ${data.date}`)
 		if (data.student && data.date){
-			socket.emit('remove response', {success: true, title: 'Успешно удалено', text: ''})
-			socket.broadcast.emit('update db', {db: [], socketId: socket.id})
+
+			database = await collection.find({}, {projection: {_id: 0}})
+
+			let currentStudent
+			for (let student of database){
+				if (student.name == data.student)
+					currentStudent = student
+			}
+
+			if (currentStudent && currentStudent.dates.includes(data.date)){
+				currentStudent.dates.splice(currentStudent.dates.indexOf(request.body.date), 1)
+				await collection.update({name: currentStudent.name}, {$set: {dates: currentStudent.dates}})
+
+				socket.emit('remove response', {success: true, title: 'Успешно удалено', text: ''})
+				io.emit('update db', {db: await collection.find({}, {projection: { _id: 0}})})
+			}
+			else {
+				socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Студент или дата не найдены'})
+			}
 		}
 		else if (data.student && !data.date){
 			socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Не выбрана дата'})

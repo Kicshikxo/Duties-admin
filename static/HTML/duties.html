@@ -71,6 +71,10 @@
 		queryAll = (query) => document.querySelectorAll(query)
 		String.prototype.reverseDate = function(){return this.split('.').reverse().join('.')}
 
+		let database = []
+
+		function getTodayDate(){return `${String(new Date().getFullYear()).padStart(2,0)}-${String(new Date().getMonth()+1).padStart(2,0)}-${String(new Date().getDate()).padStart(2,0)}`}
+
 		let removeButton   = query('#remove-button')
 		let calendarButton = query('#calendar-button')
 		let reloadButton   = query('#reload-button')
@@ -105,9 +109,36 @@
 		function toggleRemoveMenu(){
 			let content = document.createElement('div')
 
-			content.appendChild(studentsListTemplate.cloneNode(true))
+			let studentList = studentsListTemplate.cloneNode(true)
+			content.appendChild(studentList)
 
-			content.appendChild(studentsListTemplate.cloneNode(false))
+			let datesList = studentsListTemplate.cloneNode(false)
+			content.appendChild(datesList)
+
+			studentList.oninput = function(){
+				for (let student of database){
+					if (student.name === this.value){
+						if (student.dates.length > 0){
+							datesList.innerHTML = `<option value = ''>Выберите дату</option>`
+							for (let date of student.dates){
+								datesList.innerHTML += `<option value = '${date}'>${date}</option>`
+							}
+							return 
+						}
+					}
+				}
+				datesList.innerHTML = ''
+			}
+
+			// id('remove-form-student-selector').oninput = function(){
+			// 	id('remove-form-date-selector').innerHTML = '<option value = "">Выберите дату</option>'
+			// 	for (i of database){
+			// 		if (i.name == this.value){
+			// 			id('remove-form-date-selector').innerHTML = '<option value = "">Выберите дату</option>'
+			// 			for (j of i.dates) id('remove-form-date-selector').innerHTML += `<option value = '${j}'>${j}</option>`
+			// 		}
+			// 	}
+			// }
 
 			swal({
 				title: 'Удалить дежурство',
@@ -151,7 +182,7 @@
 
 			dateSelector.className = 'bg-second border-main'
 			dateSelector.type = 'date'
-			dateSelector.value = `${String(new Date().getFullYear()).padStart(2,0)}-${String(new Date().getMonth()+1).padStart(2,0)}-${String(new Date().getDate()).padStart(2,0)}`
+			dateSelector.value = getTodayDate()
 
 			content.appendChild(dateSelector)
 
@@ -165,9 +196,9 @@
 			}).then((click)=>{
 				if (click){
 					socket.emit('add request', {
-						student1: (content.children[0] || {}).value, 
-						student2: (content.children[1] || {}).value, 
-						date: (content.children[2] || {}).value
+						student1: (content.children[0] || {}).value,
+						student2: (content.children[1] || {}).value,
+						date: (content.children[2] || {}).value || getTodayDate()
 					})
 				}
 				else {
@@ -212,6 +243,7 @@
 			socket.on('get db response', function(data){
 				console.log(data.db)
 				new Noty({type: 'success', text: 'Загрузилось'}).show()
+				database = data.db
 				fillTable(data.db)
 				query('.main-table').classList.remove('hidden')
 			})
