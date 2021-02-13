@@ -35,7 +35,85 @@
 	</div>
 
 	<div class = 'container-fluid'>
-		
+		<div class = 'main-table'>
+			<table class = 'names-table'>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Богорадников<br>Денис</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Бувин<br>Алексей</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Дрюченко<br>Артём</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Заживихин<br>Дмитрий</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Кривдин<br>Сергей</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Крючкин<br>Данил</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Кузнецов<br>Валерий</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Маховицкий<br>Владимир</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Машнин<br>Владислав</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Озеров<br>Роман</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Полыновский<br>Дмитрий</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Скорятин<br>Игорь</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Спицын<br>Денис</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Тярин<br>Богдан</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Фурсин<br>Владислав</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Шевченко<br>Богдан</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Шкиперов<br>Дмитрий</td></tr>
+				<tr class = 'student-row'><td class = 'cell student-cell'>Яковлев<br>Сергей</td></tr>
+			</table>
+
+			<table class = 'dates-table'>
+				<tr class="date-row">
+					<td class="cell date-cell">1</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">2</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">3</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">4</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">5</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">6</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">7</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">8</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">9</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">10</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">11</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">12</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">13</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">14</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">15</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">16</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">17</td>
+				</tr>
+				<tr class="date-row">
+					<td class="cell date-cell">18</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 
 	<script src = '/socket.io/socket.io.js'></script>
@@ -186,6 +264,28 @@
 			})
 
 			socket.emit('get db request')
+
+			namesTable = query('.names-table')
+			datesTable = query('.dates-table')
+
+			datesTable.onmousedown = function(){
+				startX = this.scrollLeft + event.pageX
+			    startY = this.scrollTop  + event.pageY
+			    datesTable.onmousemove = function(){
+			    	this.scrollLeft = startX - event.pageX
+			        this.scrollTop  = startY - event.pageY
+			        namesTable.scrollTop = this.scrollTop
+			        return false
+			    }
+			}
+			
+			window.onmouseup = function(){
+				datesTable.onmousemove = function(){return}
+			}
+
+			datesTable.onscroll = function(){
+				namesTable.scrollTop = datesTable.scrollTop
+			}
 		}
 
 		function fillTable(database){
