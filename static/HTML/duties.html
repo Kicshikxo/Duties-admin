@@ -265,8 +265,8 @@
 
 			socket.emit('get db request')
 
-			namesTable = query('.names-table')
-			datesTable = query('.dates-table')
+			namesTable = document.getElementsByClassName('names-table')[0] //query('.names-table')
+			datesTable = document.getElementsByClassName('dates-table')[0] //query('.dates-table')
 
 			datesTable.onmousedown = function(){
 				startX = this.scrollLeft + event.pageX
@@ -278,7 +278,7 @@
 			        return false
 			    }
 			}
-			
+
 			window.onmouseup = function(){
 				datesTable.onmousemove = function(){return}
 			}
