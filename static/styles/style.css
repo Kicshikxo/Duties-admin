@@ -121,6 +121,10 @@ body {
 		#header .header-button#add-button.opened:before {transform: rotate(-45deg)}
 		#header .header-button#add-button.opened:after {transform: rotate(45deg)}
 
+select.form-select option{
+	background: var(--second-bg-color);
+}
+
 
 .swal-modal {
 	background-color: #14181D;
