@@ -67,7 +67,7 @@ io.on('connection', async function(socket){
 	socket.on('add request', async function(data){
 		console.log(`Получено: ${data.student1}, ${data.student2}, ${data.date}`)
 		if (data.date){
-			if (data.currentStudent1 || data.currentStudent2){
+			if (data.student1 || data.student2){
 
 				database = await collection.find({}, {projection: {_id: 0}})
 
