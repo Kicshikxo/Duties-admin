@@ -34,7 +34,9 @@
 		<!-- <a class = 'btn btn-outline-primary' href = '/create'>Новая комната</a> -->
 	</div>
 
-	<div class = 'container-fluid'></div>
+	<div class = 'container-fluid'>
+		
+	</div>
 
 	<script src = '/socket.io/socket.io.js'></script>
 	<script src = '/js/jquery-1.8.3.min.js'></script>
@@ -180,9 +182,14 @@
 
 			socket.on('get db response', function(data){
 				console.log(data.db)
+				fillTable(data.db)
 			})
 
 			socket.emit('get db request')
+		}
+
+		function fillTable(database){
+
 		}
 
 		window.onload = init
