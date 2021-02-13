@@ -146,10 +146,6 @@ body {
     animation: none !important;
 }
 
-.swal-overlay {
-  background-color: #0000;
-}
-
 .noty_body {
 	color: var(--main-bg-color);
 }
