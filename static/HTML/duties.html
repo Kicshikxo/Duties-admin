@@ -35,7 +35,7 @@
 	</div>
 
 	<div class = 'container-fluid'>
-		<div class = 'main-table'>
+		<div class = 'main-table hidden'>
 			<table class = 'names-table'>
 				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '1'>Богорадников<br>Денис</td></tr>
 				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '2'>Бувин<br>Алексей</td></tr>
@@ -194,7 +194,7 @@
 			addButton.addEventListener('click', toggleAddMenu)
 
 			reloadButton.addEventListener('click', () => {
-				window.parent.postMessage("","*")
+				window.parent.postMessage('','*')
 				location.reload()
 			})
 
@@ -213,6 +213,7 @@
 				console.log(data.db)
 				new Noty({type: 'success', text: 'Загрузилось'}).show()
 				fillTable(data.db)
+				query('.main-table').classList.remove('hidden')
 			})
 
 			socket.emit('get db request')

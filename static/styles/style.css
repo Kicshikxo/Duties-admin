@@ -170,7 +170,13 @@ body {
 		border: 2px solid var(--main-bg-color);
 		display: flex;
 		margin: 10px;
-		border-radius: .25rem
+		border-radius: .25rem;
+		opacity: 1;
+		transition: .5s opacity;
+	}
+
+	.main-table.hidden {
+		opacity: 0
 	}
 
 		.names-table {
