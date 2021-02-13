@@ -194,7 +194,7 @@ body {
 			pointer-events: none;
 		}
 
-		.main-table .loader-inner {
+		.main-table .loader .loader-inner {
 			vertical-align: top;
 			display: inline-block;
 			width: 100%;
