@@ -16,6 +16,8 @@
 
 	--date-cell-width: 64px;
 	--date-cell-height: 46px;
+
+	--header-height: 56px;
 }
 
 * {
@@ -82,7 +84,7 @@ body {
 #header {
 	/*border-bottom-right-radius: 10px;*/
     /*border-bottom-left-radius: 10px;*/
-    height: 56px;
+    height: var(--header-height);
 }
 
 	#header #header-title {
@@ -145,7 +147,7 @@ body {
 
 .container-fluid {
 	width: 100%;
-	height: calc(100% - 56px - 2px * 4);
+	height: calc(100% - var(--header-height) - 2px * 4);
 	padding: 0;
 }
 	
@@ -232,7 +234,9 @@ body {
 }
 
 .swal-overlay {
-    background: none;
+    /*background: none;*/
+    /*top: var(--header-height);*/
+    background: linear-gradient(to bottom, #0000 0px, #0000 var(--header-height), #0006 var(--header-height), #0006 100% );
 }
 
 .noty_body {
