@@ -9,6 +9,8 @@
 	--main-color: #7CD1F9;
 	--main-text-color: #EEE;
 
+	--swal-bg: #22252A;
+
 	--main-border-color: #34383e;
 	--second-border-color: #14181D;
 
@@ -186,7 +188,7 @@ body {
 				}
 
 		.dates-table {
-			width: calc(100% - var(--student-cell-width) + 4px);
+			width: calc(100% - var(--student-cell-width) + 5px);
 			height: 100%;
 			overflow-x: scroll;
 			overflow-y: scroll;
@@ -212,7 +214,7 @@ body {
 
 .swal-modal {
 	/*background-color: var(--main-bg-color);*/
-	background-color: #22252A;
+	background-color: var(--swal-bg);
 	/*background-color: #14181D;*/
 	color: var(--main-text-color);
 	/*border: 3px solid white;*/
