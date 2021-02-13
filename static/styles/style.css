@@ -43,6 +43,11 @@
 	border-color: #34383e !important;
 }
 
+.container-fluid {
+	width: 100%;
+	height: calc(100% - 56px);
+}
+
 select {
 	background: var(--main-bg-color);
 }
