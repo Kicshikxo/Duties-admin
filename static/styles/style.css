@@ -166,7 +166,6 @@ body {
 	
 	.main-table {
 		width:  calc(100% - 10px * 2);
-		min-height: 0;
 		max-height: calc(100% - 10px);
 		border: 2px solid var(--main-bg-color);
 		display: flex;
