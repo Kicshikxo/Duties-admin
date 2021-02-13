@@ -271,7 +271,32 @@ body {
 					/*margin-bottom: -2px;*/
 				}
 
+			.dates-table .date-cell .inner {
+				transition: .5s opacity;
+			}
+
+			.dates-table .date-cell .inner.days-passed {
+				opacity: 0
+			}
+
+			.dates-table .date-cell.show-past-days .inner.days-passed {
+				opacity: 1
+			}
+
+			.dates-table .date-cell.show-past-days .inner.date {
+				opacity: 0
+			}
+
+	.cell {
+		position: relative;
+	}
+
 	.cell .inner {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
 		display: flex;
 		justify-content: center;
 		align-items: center;

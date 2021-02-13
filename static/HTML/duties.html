@@ -223,7 +223,7 @@
 			})
 		})
 
-		swal()
+		swal({button:false})
 		setTimeout(function(){
 			swal.close()
 		})
@@ -232,6 +232,8 @@
 
 			removeButton.addEventListener('click', toggleRemoveMenu)
 			addButton.addEventListener('click', toggleAddMenu)
+
+			calendarButton.addEventListener('click', toggleShowPastDays)
 
 			reloadButton.addEventListener('click', () => {
 				window.parent.postMessage('','*')
@@ -327,15 +329,21 @@
 				else for (date of student.dates){
 					query(`.dates-table .date-row:nth-child(${studentsIndexes[student.name]})`).innerHTML += `
 						<td class = 'cell date-cell' data-date = '${date}'>
-							<div class = 'inner'>
+							<div class = 'inner date'>
 								<div>${date.split('.').slice(0,2).join('.')}</div>
 								<small>${nameOfDaysOfWeek[new Date(date.reverseDate()).getDay()]}</small>
-							<div>
+							</div>
+							<div class = 'inner days-passed'>
+								<div>${~~((new Date() - new Date(date.reverseDate()))/86400000)}</div>
+								<small>дней назад</small>
+							</div>
 						</td>`
-					// tr[nameToNumber[student.name]].innerHTML += `<td class = 'mark' data-date = '${j}'><div><div>${j.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(j.reverseDate()).getDay()]}</small></div></td>`
-					// if (j == `${new Date().getDate()}.${new Date().getMonth()+1}.${new Date().getFullYear()}`) onDutyToday.push(student.name)
 				}
 			}
+		}
+
+		function toggleShowPastDays(){
+			$('.dates-table .date-cell:not(.empty)').toggleClass('show-past-days')
 		}
 
 		window.onload = init
