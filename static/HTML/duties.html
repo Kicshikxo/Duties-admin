@@ -295,7 +295,7 @@
 			'Яковлев Сергей': 18
 		}
 
-		daysToNumber = {
+		nameOfDaysOfWeek = {
 			0: 'воскресенье',
 			1: 'понедельник',
 			2: 'вторник',
@@ -319,7 +319,7 @@
 						<td class = 'cell date-cell' data-date = '${date}'>
 							<div class = 'inner'>
 								<div>${date.split('.').slice(0,2).join('.')}</div>
-								<small>${daysToNumber[new Date(date.reverseDate()).getDay()]}</small>
+								<small>${nameOfDaysOfWeek[new Date(date.reverseDate()).getDay()]}</small>
 							<div>
 						</td>`
 					// tr[nameToNumber[student.name]].innerHTML += `<td class = 'mark' data-date = '${j}'><div><div>${j.split('.').slice(0,2).join('.')}</div><small>${daysToNumber[new Date(j.reverseDate()).getDay()]}</small></div></td>`
