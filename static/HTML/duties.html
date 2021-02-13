@@ -216,6 +216,13 @@
 				query('.main-table').classList.remove('hidden')
 			})
 
+			socket.on('update db', function(data){
+				if (data.socketId !== socket.id){
+					new Noty({type: 'success', text: 'Загрузилось'}).show()
+					fillTable(data.db)
+				}
+			})
+
 			socket.emit('get db request')
 		}
 

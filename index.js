@@ -68,6 +68,7 @@ io.on('connection', async function(socket){
 		console.log(`Получено: ${data.student1}, ${data.student2}`)
 		if (data.student1 || data.student2){
 			socket.emit('add response', {success: true, title: 'Успешно добавлено', text: ''})
+			io.sockets.emit('update db', {db: {}, socketId: socket.id})
 		}
 		else if (!data.student1 && !data.student2){
 			socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Ни один студент не выбран'})
@@ -78,6 +79,7 @@ io.on('connection', async function(socket){
 		console.log(`Получено: ${data.student}, ${data.date}`)
 		if (data.student && data.date){
 			socket.emit('remove response', {success: true, title: 'Успешно удалено', text: ''})
+			io.sockets.emit('update db', {db: {}, socketId: socket.id})
 		}
 		else if (data.student && !data.date){
 			socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Не выбрана дата'})

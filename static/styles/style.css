@@ -266,7 +266,7 @@ body {
 .swal-icon--success:after,
 .swal-icon--success__hide-corners {
 	/*background: none;*/
-	background: var(--main-bg-color);
+	background: var(--swal-bg);
 }
 
 .swal-icon--success__hide-corners {
