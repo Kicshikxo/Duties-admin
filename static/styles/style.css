@@ -52,6 +52,11 @@ select.form-select {
 	color: var(--main-text-color);
 }
 
+body {
+	width: 100vw;
+	height: 100vh;
+}
+
 #header {
 	/*border-bottom-right-radius: 10px;*/
     /*border-bottom-left-radius: 10px;*/
