@@ -6,7 +6,7 @@
 :root {
 	--main-bg-color: #222831;
 	--second-bg-color: #393e46;
-	--main-color: #00adb5;
+	--main-color: #7CD1F9;
 	--main-text-color: #EEE;
 }
 
@@ -128,7 +128,8 @@ select.form-select option{
 
 
 .swal-modal {
-	background-color: #14181D;
+	background-color: var(--main-bg-color);
+	/*background-color: #14181D;*/
 	color: var(--main-text-color);
 	/*border: 3px solid white;*/
 }
@@ -149,6 +150,10 @@ select.form-select option{
 
 .swal-overlay--show-modal, .swal-modal {
     animation: none !important;
+}
+
+.swal-overlay {
+    background: none;
 }
 
 .noty_body {
