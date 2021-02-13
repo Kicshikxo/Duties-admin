@@ -68,6 +68,7 @@ small {
 table {
 	border-collapse: collapse;
 	display: block;
+	position: relative;
 }
 
 select {
@@ -235,7 +236,7 @@ body {
 
 		.dates-table {
 			width: calc(100% - var(--student-cell-width) + 5px);
-			overflow: scroll;
+			overflow: auto;
 			will-change: scroll-position;
 			transition: .5s opacity;
 		}
