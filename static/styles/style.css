@@ -157,6 +157,10 @@ body {
 	background: var(--main-bg-color);
 }
 
+.swal-icon--success__hide-corners {
+	border: 2px solid var(--main-bg-color);
+}
+
 .swal-overlay--show-modal, .swal-modal {
     animation: none !important;
 }
