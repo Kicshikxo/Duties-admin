@@ -171,17 +171,56 @@ body {
 		display: flex;
 		margin: 10px;
 		border-radius: .25rem;
+		position: relative;
 		opacity: 1;
-		transition: .5s opacity;
 	}
 
-	.main-table.hidden {
-		opacity: 0
-	}
+		.main-table.hidden .names-table,
+		.main-table.hidden .dates-table {
+			opacity: 0;
+			pointer-events: none
+		}
+
+		.main-table .loader {
+			display: block;
+			margin: 0 auto;
+			width: 64px;
+			height: 64px;
+			position: absolute;
+			left: calc(50% - 32px);
+			top: calc(50% - 32px);
+			border: 4px solid #14181D;
+			animation: cssload-loader 2.3s infinite ease;
+			pointer-events: none;
+		}
+
+		.main-table .loader-inner {
+			vertical-align: top;
+			display: inline-block;
+			width: 100%;
+			background-color: #14181D;
+			animation: cssload-loader-inner 2.3s infinite ease-in;
+		}
+
+		@keyframes cssload-loader {
+			0% {transform: rotate(0deg)}
+			25% {transform: rotate(180deg)}
+			50% {transform: rotate(180deg)}
+			75% {transform: rotate(360deg)}
+			100% {transform: rotate(360deg)}
+		}
+		@keyframes cssload-loader-inner {
+			0% {height: 0%}
+			25% {height: 0%}
+			50% {height: 100%}
+			75% {height: 100%}
+			100% {height: 0%}
+		}
 
 		.names-table {
 			width: var(--student-cell-width);
             overflow: hidden;
+            transition: .5s opacity;
 		}
 
 			.names-table .student-cell {
@@ -207,6 +246,7 @@ body {
 			width: calc(100% - var(--student-cell-width) + 5px);
 			overflow-x: scroll;
 			overflow-y: scroll;
+			transition: .5s opacity;
 		}
 
 			.dates-table .date-row .date-cell{

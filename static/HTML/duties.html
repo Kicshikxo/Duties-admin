@@ -36,6 +36,7 @@
 
 	<div class = 'container-fluid'>
 		<div class = 'main-table hidden'>
+			<span class="loader"><span class="loader-inner"></span></span>
 			<table class = 'names-table'>
 				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '1'>Богорадников<br>Денис</td></tr>
 				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '2'>Бувин<br>Алексей</td></tr>
@@ -244,6 +245,7 @@
 			socket.on('get db response', function(data){
 				// new Noty({text: 'Загружено'}).show()
 				fillTable(data.db)
+				$('.loader').fadeOut(500)
 				query('.main-table').classList.remove('hidden')
 			})
 
