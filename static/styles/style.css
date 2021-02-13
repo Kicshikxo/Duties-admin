@@ -277,8 +277,3 @@ body {
 .noty_body {
 	color: var(--main-bg-color);
 }
-
-::-webkit-scrollbar {
-	width: 0;
-	height: 0;
-}
