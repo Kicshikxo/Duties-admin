@@ -60,6 +60,7 @@ small {
     font-size: .6em;
 	white-space: nowrap;
     color: var(--main-color);
+    font-weight: bold;
 }
 
 table {
