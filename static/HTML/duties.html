@@ -236,19 +236,19 @@
 			Noty.overrideDefaults({
 				theme: 'bootstrap-v4',
 				layout: 'bottomRight',
+				type: 'dark',
 				timeout: 3000,
 				progressBar: true
 			})
 
 			socket.on('get db response', function(data){
-				console.log(data.db)
-				new Noty({type: 'success', text: 'Загрузилось'}).show()
+				// new Noty({text: 'Загружено'}).show()
 				fillTable(data.db)
 				query('.main-table').classList.remove('hidden')
 			})
 
 			socket.on('update db', function(data){
-				new Noty({type: 'success', text: 'Обновлено'}).show()
+				new Noty({text: 'Обновлено'}).show()
 				fillTable(data.db)
 			})
 
