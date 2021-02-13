@@ -170,6 +170,12 @@
 			})
 
 			new Noty({type: 'success', text: 'Загрузилось'}).show()
+
+			socket.on('get db response', function(data){
+				console.log(data.db)
+			})
+
+			socket.emit('get db request')
 		}
 
 		window.onload = init

@@ -52,6 +52,15 @@ select.form-select {
 	color: var(--main-text-color);
 }
 
+select.form-select option{
+	background: var(--second-bg-color);
+	color: var(--main-text-color);
+}
+
+input[type='date'] {
+	border-radius: .25rem;
+}
+
 body {
 	width: 100vw;
 	height: 100vh;
@@ -120,12 +129,6 @@ body {
 
 		#header .header-button#add-button.opened:before {transform: rotate(-45deg)}
 		#header .header-button#add-button.opened:after {transform: rotate(45deg)}
-
-select.form-select option{
-	background: var(--second-bg-color);
-	color: var(--main-text-color);
-}
-
 
 .swal-modal {
 	background-color: var(--main-bg-color);
