@@ -166,7 +166,8 @@ body {
 	
 	.main-table {
 		width:  calc(100% - 10px * 2);
-		height: calc(100% - 10px);
+		min-height: 0;
+		max-height: calc(100% - 10px);
 		border: 2px solid var(--main-bg-color);
 		display: flex;
 		margin: 10px;
@@ -186,7 +187,7 @@ body {
 
 			.names-table .student-cell {
 				width: 100%;
-				height: calc(var(--cell-height) - 0px);
+				height: var(--cell-height);
 				padding: 2px 4px;
 				border: 2px solid var(--main-bg-color);
 				border-left: none;
@@ -205,7 +206,6 @@ body {
 
 		.dates-table {
 			width: calc(100% - var(--student-cell-width) + 5px);
-			height: 100%;
 			overflow-x: scroll;
 			overflow-y: scroll;
 		}
