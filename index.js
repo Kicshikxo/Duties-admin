@@ -125,14 +125,11 @@ io.on('connection', async function(socket){
 				socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Студент или дата не найдены'})
 			}
 		}
-		else if (data.student && !data.date){
-			socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Не выбрана дата'})
-		}
-		else if (!data.student && data.date){
+		else if (!data.student){
 			socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Не выбран студент'})
 		}
-		else if (!data.student && !data.date){
-			socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Ничего не выбрано'})
+		else if (!data.date){
+			socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Не выбрана дата'})
 		}
 	})
 
