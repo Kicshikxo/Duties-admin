@@ -73,9 +73,9 @@ io.on('connection', async function(socket){
 
 				let currentStudent1, currentStudent2
 				for (let student of database){
-					if (student.name == data.currentStudent1)
+					if (student.name == data.student1)
 						currentStudent1 = student
-					else if (student.name == data.currentStudent2)
+					else if (student.name == data.student2)
 						currentStudent2 = student
 				}
 
@@ -88,6 +88,9 @@ io.on('connection', async function(socket){
 
 					socket.emit('add response', {success: true, title: 'Успешно добавлено', text: ''})
 					io.emit('update db', {db: await collection.find({}, {projection: { _id: 0}})})
+				}
+				else {
+					socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Студент не найден'})
 				}
 			}
 			else if (!data.currentStudent1 && !data.currentStudent2){
