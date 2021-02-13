@@ -213,6 +213,7 @@ body {
 	/*background-color: #14181D;*/
 	color: var(--main-text-color);
 	/*border: 3px solid white;*/
+	margin-top: var(--header-height);
 }
 
 .swal-title {
