@@ -23,7 +23,7 @@
 
     color: var(--main-text-color);
 
-    /*outline: none !important;*/
+    outline: none !important;
 	-webkit-tap-highlight-color: #0000;
 }
 
