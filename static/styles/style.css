@@ -258,9 +258,18 @@ body {
 				.dates-table .date-row:last-child .date-cell {border-bottom: none}
 
 			.dates-table .date-cell .inner {transition: .25s opacity linear}
-			.dates-table .date-cell .inner.days-passed {opacity: 0}
-			.dates-table .date-cell.show-past-days .inner.days-passed {opacity: 1}
-			.dates-table .date-cell.show-past-days .inner.date {opacity: 0}
+			.dates-table .date-cell .inner.days-passed {
+				display: none;
+				opacity: 0
+			}
+			.dates-table .date-cell.show-past-days .inner.days-passed {
+				display: flex;
+				opacity: 1
+			}
+			.dates-table .date-cell.show-past-days .inner.date {
+				display: none;
+				opacity: 0
+			}
 
 	.cell {position: relative}
 
