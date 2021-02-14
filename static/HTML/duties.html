@@ -323,6 +323,10 @@
 								<div>${date.split('.').slice(0,2).join('.')}</div>
 								<small>${nameOfDaysOfWeek[new Date(date.reverseDate()).getDay()]}</small>
 							</div>
+							<div class = 'inner days-passed'>
+								<div>${~~((new Date() - new Date(date.reverseDate()))/86400000)}</div>
+								<small>дней назад</small>
+							</div>
 						</td>`
 				}
 			}
