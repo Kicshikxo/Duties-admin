@@ -68,6 +68,7 @@ small {
 table {
 	border-collapse: collapse;
 	display: block;
+	position: relative;
 }
 
 select {
@@ -216,6 +217,7 @@ body {
 		.names-table {
 			width: var(--student-cell-width);
             overflow: hidden;
+            will-change: scroll-position;
             transition: .5s opacity;
 		}
 
@@ -234,8 +236,8 @@ body {
 
 		.dates-table {
 			width: calc(100% - var(--student-cell-width) + 5px);
-			overflow-x: scroll;
-			overflow-y: scroll;
+			overflow: auto;
+			will-change: scroll-position;
 			transition: .5s opacity;
 		}
 
@@ -255,7 +257,7 @@ body {
 				.dates-table .date-row:first-child .date-cell {border-top: none}
 				.dates-table .date-row:last-child .date-cell {border-bottom: none}
 
-			.dates-table .date-cell .inner {transition: .25s opacity linear}
+			.dates-table .date-cell .inner {transition: .2s opacity linear}
 			.dates-table .date-cell .inner.days-passed {opacity: 0}
 			.dates-table .date-cell.show-past-days .inner.days-passed {opacity: 1}
 			.dates-table .date-cell.show-past-days .inner.date {opacity: 0}
