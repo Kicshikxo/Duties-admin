@@ -68,9 +68,9 @@ io.on('connection', async function(socket){
 		socket.emit('get db response', {db: await getDB()})
 	})
 
-	socket.on('get app version request', function(){
+	socket.on('check for updates request', function(){
 		let package = require('./package.json')
-		socket.emit('get app version response', {version: package.version, updateurl: package.updateurl})
+		socket.emit('check for updates response', {version: package.version, updateurl: package.updateurl})
 	})
 
 	socket.on('add request', async function(data){
