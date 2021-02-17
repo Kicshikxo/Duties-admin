@@ -1,6 +1,7 @@
 {
   "name": "Duties",
   "version": "1.0.0",
+  "updateurl": "https://bit.ly/",
   "description": "",
   "main": "index.js",
   "scripts": {

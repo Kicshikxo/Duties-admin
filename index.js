@@ -8,8 +8,6 @@ const path = require('path')
 const bodyParser = require("body-parser")
 const urlencodedParser = bodyParser.urlencoded({extended: false})
 
-const appVersion = require('./package.json').version
-
 const cors = require('cors')
 
 app.use(cors())
@@ -71,7 +69,8 @@ io.on('connection', async function(socket){
 	})
 
 	socket.on('get app version request', function(){
-		socket.emit('get app version response', {version: appVersion})
+		let package = require('./package.json')
+		socket.emit('get app version response', {version: package.version, updateurl: package.updateurl})
 	})
 
 	socket.on('add request', async function(data){
