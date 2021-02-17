@@ -2,14 +2,7 @@ const express = require('express')
 const compression = require('compression')
 const app = express()
 const server = require('http').createServer(app)
-const io = require('socket.io')(server, {
-	cors: {
-		origin: '*',
-		methods: ['GET', 'POST'],
-		allowedHeaders: ['tz29oWKq4ZwMZwGOaqaN'],
-		credentials: true
-	}
-})
+const io = require('socket.io')(server)
 const ejs = require('ejs')
 const path = require('path')
 const bodyParser = require("body-parser")
