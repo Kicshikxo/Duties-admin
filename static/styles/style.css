@@ -224,7 +224,7 @@ body {
 		}
 
 			.names-table .student-cell {
-				width: 100%;
+				width: var(--student-cell-width);
 				height: var(--cell-height);
 				padding: 2px 4px;
 				border: 2px solid var(--main-bg-color);

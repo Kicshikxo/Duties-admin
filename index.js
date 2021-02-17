@@ -6,7 +6,9 @@ const io = require('socket.io')(server)
 const ejs = require('ejs')
 const path = require('path')
 const bodyParser = require("body-parser")
-const urlencodedParser = bodyParser.urlencoded({extended: false});
+const urlencodedParser = bodyParser.urlencoded({extended: false})
+
+const packageVersion = require('./package.json').version
 
 app.use(compression())
 
