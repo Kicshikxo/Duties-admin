@@ -303,7 +303,7 @@ body {
 }
 
 .swal-icon--success__hide-corners {
-	border: 2px solid var(--main-bg-color);
+	border: 2px solid var(--swal-bg);
 }
 
 .swal-overlay--show-modal, .swal-modal {
