@@ -40,6 +40,8 @@
 
     outline: none !important;
 	-webkit-tap-highlight-color: #0000;
+
+	touch-action: manipulation;
 }
 
 *:focus {
