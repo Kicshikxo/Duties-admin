@@ -274,6 +274,7 @@
 		datesTable.onscroll = function(e){
 			e.preventDefault()
 			namesTable.scrollTop = this.scrollTop
+			e.stopPropagation()
 		}
 
 		studentsIndexes = {
