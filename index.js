@@ -2,7 +2,13 @@ const express = require('express')
 const compression = require('compression')
 const app = express()
 const server = require('http').createServer(app)
-const io = require('socket.io')(server)
+const io = require('socket.io')(server, {
+	cors: {
+		origin: 'http://www.duties-admin.tk/',
+		methods: ['GET', 'POST'],
+		allowedHeaders: ['tz29oWKq4ZwMZwGOaqaN']
+	}
+})
 const ejs = require('ejs')
 const path = require('path')
 const bodyParser = require("body-parser")
