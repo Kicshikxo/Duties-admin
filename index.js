@@ -4,7 +4,7 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server, {
 	cors: {
-		origin: 'http://www.duties-admin.tk/',
+		origin: 'http://localhost:3000',
 		methods: ['GET', 'POST'],
 		allowedHeaders: ['tz29oWKq4ZwMZwGOaqaN']
 	}
