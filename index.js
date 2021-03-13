@@ -81,12 +81,13 @@ io.on('connection', async function(socket){
 				if (data.student1) data.students = [data.student1]
 				if (data.student2) data.students.push(data.student2)
 			}
-		
+
 			if (data.students.length !== 0){
 
 				database = await collection.find({}, {projection: {_id: 0}})
 
 				for (let student of data.students){
+					if (!student) continue
 					let currentStudent
 					for (let student_ of database){
 						if (student_.name === student)
