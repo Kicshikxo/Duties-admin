@@ -1,7 +1,7 @@
 {
   "name": "Duties",
   "version": "2.0.9",
-  "updateurl": "https://disk.yandex.ru/d/drL3uGs4hQnJTw",
+  "updateurl": "https://disk.yandex.ru/d/EScuH0Vud5vEqg",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Kicshikxo",
   "license": "ISC",
   "dependencies": {
     "compression": "^1.7.4",
