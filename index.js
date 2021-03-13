@@ -99,12 +99,12 @@ io.on('connection', async function(socket){
 						await collection.update({name: currentStudent.name}, {$set: {dates: currentStudent.dates.concat(date).sort(sort)}})
 
 						socket.emit('add response', {success: true, title: 'Успешно добавлено', text: ''})
-						io.emit('update db', {db: await collection.find({}, {projection: { _id: 0}})})
 					}
 					else {
 						socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Студент не найден'})
 					}
 				}
+				io.emit('update db', {db: await collection.find({}, {projection: { _id: 0}})})
 			}
 			else {
 				socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Ни один студент не выбран'})
