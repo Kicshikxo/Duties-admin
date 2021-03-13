@@ -91,7 +91,7 @@ io.on('connection', async function(socket){
 
 				for (let student of data.students){
 					if (!student) continue
-					let currentStudent = null
+					let currentStudent
 					for (let student_ of database){
 						if (student_.name === student)
 							currentStudent = student_
