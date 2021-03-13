@@ -89,6 +89,8 @@ io.on('connection', async function(socket){
 
 				database = await collection.find({}, {projection: {_id: 0}})
 
+				let needToUpdate = false
+
 				for (let student of data.students){
 					if (!student) continue
 					let currentStudent
@@ -98,16 +100,18 @@ io.on('connection', async function(socket){
 					}
 
 					if (currentStudent){
+						needToUpdate = true
 						let date = data.date.split('-').reverse().join('.')
 						await collection.update({name: currentStudent.name}, {$set: {dates: currentStudent.dates.concat(date).sort(sort)}})
 
 						socket.emit('add response', {success: true, title: 'Успешно добавлено', text: ''})
-						io.emit('update db', {db: await collection.find({}, {projection: { _id: 0}})})
 					}
 					else {
 						socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Студент не найден'})
 					}
 				}
+
+				if (needToUpdate) io.emit('update db', {db: await collection.find({}, {projection: { _id: 0}})})
 			}
 			else {
 				socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Ни один студент не выбран'})
