@@ -97,21 +97,21 @@ io.on('connection', async function(socket){
 						let date = data.date.split('-').reverse().join('.')
 						await collection.update({name: currentStudent.name}, {$set: {dates: currentStudent.dates.concat(date).sort(sort)}})
 
-						socket.emit('add response', {success: true, title: 'Успешно добавлено', text: ''})
+						socket.emit('server response', {success: true, title: 'Успешно добавлено', text: ''})
 					}
 					else {
-						socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Студент не найден'})
+						socket.emit('server response', {success: false, title: 'Не удалось добавить', text: 'Студент не найден'})
 					}
 				}
 
 				if (needToUpdate) io.emit('update db', {db: await collection.find({}, {projection: { _id: 0}})})
 			}
 			else {
-				socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Ни один студент не выбран'})
+				socket.emit('server response', {success: false, title: 'Не удалось добавить', text: 'Ни один студент не выбран'})
 			}
 		}
 		else {
-			socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Не указана дата'})
+			socket.emit('server response', {success: false, title: 'Не удалось добавить', text: 'Не указана дата'})
 		}
 	})
 
@@ -130,18 +130,18 @@ io.on('connection', async function(socket){
 				currentStudent.dates.splice(currentStudent.dates.indexOf(data.date), 1)
 				await collection.update({name: currentStudent.name}, {$set: {dates: currentStudent.dates}})
 
-				socket.emit('remove response', {success: true, title: 'Успешно удалено', text: ''})
+				socket.emit('server response', {success: true, title: 'Успешно удалено', text: ''})
 				io.emit('update db', {db: await collection.find({}, {projection: { _id: 0}})})
 			}
 			else {
-				socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Студент или дата не найдены'})
+				socket.emit('server response', {success: false, title: 'Не удалось удалить', text: 'Студент или дата не найдены'})
 			}
 		}
 		else if (!data.student){
-			socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Не выбран студент'})
+			socket.emit('server response', {success: false, title: 'Не удалось удалить', text: 'Не выбран студент'})
 		}
 		else if (!data.date){
-			socket.emit('remove response', {success: false, title: 'Не удалось удалить', text: 'Не выбрана дата'})
+			socket.emit('server response', {success: false, title: 'Не удалось удалить', text: 'Не выбрана дата'})
 		}
 	})
 
