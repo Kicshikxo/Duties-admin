@@ -74,6 +74,7 @@ io.on('connection', async function(socket){
 	})
 
 	socket.on('add request', async function(data){
+		console.log(data)
 		if (data.date){
 
 			// Legacy
