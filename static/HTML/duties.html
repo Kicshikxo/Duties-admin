@@ -163,41 +163,41 @@
 
 		function toggleAddMenu(){
 
-			let content = document.createElement('div')
+		let content = document.createElement('div')
 
-			content.appendChild(studentsListTemplate.cloneNode(true))
-			content.appendChild(studentsListTemplate.cloneNode(true))
+		content.appendChild(studentsSelectTemplate.cloneNode(true))
+		content.appendChild(studentsSelectTemplate.cloneNode(true))
 
-			let dateSelector = document.createElement('input')
+		let dateSelector = document.createElement('input')
 
-			dateSelector.className = 'bg-second border-main'
-			dateSelector.type = 'date'
-			dateSelector.value = getTodayDate()
+		dateSelector.className = 'bg-second border-main'
+		dateSelector.id = 'date-selector'
+		dateSelector.type = 'date'
+		dateSelector.value = getTodayDate()
 
-			content.appendChild(dateSelector)
+		content.appendChild(dateSelector)
 
-			swal({
-				title: 'Добавить дежурство',
-				content: content,
-				button: {
-					text: 'Добавить',
-					closeModal: false
-				}
-			}).then((click)=>{
-				if (click){
-					socket.emit('add request', {
-						student1: (content.children[0] || {}).value,
-						student2: (content.children[1] || {}).value,
-						date: (content.children[2] || {}).value || getTodayDate()
-					})
-				}
-				else {
-					addButton.classList.remove('opened')
-				}
-			})
+		swal({
+			title: 'Добавить дежурство',
+			content: content,
+			button: {
+				text: 'Добавить',
+				closeModal: false
+			}
+		}).then(click=>{
+			if (click){
+				socket.emit('add request', {
+					students: [(content.children[0] || {}).value, (content.children[1] || {}).value],
+					date: (query('#date-selector') || {}).value || getTodayDate()
+				})
+			}
+			else {
+				addButton.classList.remove('opened')
+			}
+		})
 
-			addButton.classList.add('opened')
-		}
+		addButton.classList.add('opened')
+	}
 
 		socket.on('add response', function(data){
 			swal({
