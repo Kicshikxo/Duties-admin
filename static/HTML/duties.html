@@ -105,6 +105,17 @@
 			<option value = 'Шкиперов Дмитрий'>Шкиперов Дмитрий</option>
 			<option value = 'Яковлев Сергей'>Яковлев Сергей</option>
 		</select>`)[0]
+		
+		socket.on('server response', function(data){
+			swal({
+				icon: (data.success) ? 'success' : 'error',
+				title: data.title,
+				text: data.text
+			}).then(()=>{
+				addButton.classList.remove('opened')
+				removeButton.classList.remove('opened')
+			})
+		})
 
 		function toggleRemoveMenu(){
 			let content = document.createElement('div')
@@ -151,16 +162,6 @@
 			removeButton.classList.add('opened')
 		}
 
-		socket.on('remove response', function(data){
-			swal({
-				icon: (data.success) ? 'success' : 'error',
-				title: data.title,
-				text: data.text
-			}).then(()=>{
-				removeButton.classList.remove('opened')
-			})
-		})
-
 		function toggleAddMenu(){
 
 		let content = document.createElement('div')
@@ -198,16 +199,6 @@
 
 		addButton.classList.add('opened')
 	}
-
-		socket.on('add response', function(data){
-			swal({
-				icon: (data.success) ? 'success' : 'error',
-				title: data.title,
-				text: data.text
-			}).then(()=>{
-				addButton.classList.remove('opened')
-			})
-		})
 
 		// swal()
 		// setTimeout(function(){
