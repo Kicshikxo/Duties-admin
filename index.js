@@ -75,33 +75,37 @@ io.on('connection', async function(socket){
 
 	socket.on('add request', async function(data){
 		if (data.date){
+
+			// Legacy
 			if (data.student1 || data.student2){
+				if (data.student1) data.students = [data.student1]
+				if (data.student2) data.students.push(data.student2)
+			}
+		
+			if (data.students.length !== 0){
 
 				database = await collection.find({}, {projection: {_id: 0}})
 
-				let currentStudent1, currentStudent2
-				for (let student of database){
-					if (student.name == data.student1)
-						currentStudent1 = student
-					else if (student.name == data.student2)
-						currentStudent2 = student
-				}
+				for (let student of data.students){
+					let currentStudent
+					for (let student_ of database){
+						if (student_.name === student)
+							currentStudent = student_
+					}
 
-				if (currentStudent1 || currentStudent2){
-					let date = data.date.split('-').reverse().join('.')
-				    if (currentStudent1)
-						await collection.update({name: currentStudent1.name}, {$set: {dates: currentStudent1.dates.concat(date).sort(sort)}})
-					if (currentStudent2)
-						await collection.update({name: currentStudent2.name}, {$set: {dates: currentStudent2.dates.concat(date).sort(sort)}})
+					if (currentStudent){
+						let date = data.date.split('-').reverse().join('.')
+						await collection.update({name: currentStudent.name}, {$set: {dates: currentStudent.dates.concat(date).sort(sort)}})
 
-					socket.emit('add response', {success: true, title: 'Успешно добавлено', text: ''})
-					io.emit('update db', {db: await collection.find({}, {projection: { _id: 0}})})
-				}
-				else {
-					socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Студент не найден'})
+						socket.emit('add response', {success: true, title: 'Успешно добавлено', text: ''})
+						io.emit('update db', {db: await collection.find({}, {projection: { _id: 0}})})
+					}
+					else {
+						socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Студент не найден'})
+					}
 				}
 			}
-			else if (!data.currentStudent1 && !data.currentStudent2){
+			else {
 				socket.emit('add response', {success: false, title: 'Не удалось добавить', text: 'Ни один студент не выбран'})
 			}
 		}
