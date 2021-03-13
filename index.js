@@ -76,13 +76,6 @@ io.on('connection', async function(socket){
 	socket.on('add request', async function(data){
 		console.log(data)
 		if (data.date){
-
-			// Legacy
-			if (data.student1 || data.student2){
-				if (data.student1) data.students = [data.student1]
-				if (data.student2) data.students.push(data.student2)
-			}
-
 			data.students = data.students.filter(_=>_)
 
 			if (data.students.length !== 0){
