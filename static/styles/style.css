@@ -89,6 +89,10 @@ select.form-select option{
 
 input[type='date'] {
 	border-radius: .25rem;
+	color: var(--main-text-color);
+	height: 32px;
+	padding-right: 10px;
+	border: none
 }
 
 body {
