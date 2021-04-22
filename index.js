@@ -26,12 +26,10 @@ app.set('views', __dirname)
 
 uri = process.env.MONGO_DB_URI || require('./mongo-db-uri.json').uri
 
-console.log(uri)
-
 db = require('monk')(uri)
 collection = db.get('Duties')
 
-function sort(a,b){
+function sortDates(a,b){
 	a = a.split('.')
 	b = b.split('.')
 	if (a[2] != b[2]) 
@@ -100,7 +98,7 @@ io.on('connection', async function(socket){
 					if (currentStudent){
 						needToUpdate = true
 						let date = data.date.split('-').reverse().join('.')
-						await collection.update({name: currentStudent.name}, {$set: {dates: currentStudent.dates.concat(date).sort(sort)}})
+						await collection.update({name: currentStudent.name}, {$set: {dates: currentStudent.dates.concat(date).sort(sortDates)}})
 
 						socket.emit('server response', {success: true, title: 'Успешно добавлено', text: ''})
 					}
