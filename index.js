@@ -2,7 +2,9 @@ const express = require('express')
 const compression = require('compression')
 const app = express()
 const server = require('http').createServer(app)
-const io = require('socket.io')(server)
+const io = require('socket.io')(server, {
+    cors: { origin: "*" }
+})
 const ejs = require('ejs')
 const path = require('path')
 const bodyParser = require("body-parser")
@@ -22,8 +24,11 @@ app.engine('html', ejs.renderFile)
 app.set('view engine', 'html')
 app.set('views', __dirname)
 
-url = '\x6D\x6F\x6E\x67\x6F\x64\x62\x2B\x73\x72\x76\x3A\x2F\x2F\x4B\x69\x63\x73\x68\x69\x6B\x78\x6F\x3A\x75\x61\x33\x77\x69\x6B\x71\x77\x65\x40\x63\x6C\x75\x73\x74\x65\x72\x30\x2D\x38\x68\x75\x6D\x79\x2E\x67\x63\x70\x2E\x6D\x6F\x6E\x67\x6F\x64\x62\x2E\x6E\x65\x74\x2F\x44\x75\x74\x69\x65\x73'
-db = require('monk')(url)
+uri = process.env.MONGO_DB_URI || require('./mongo-db-uri.json').uri
+
+console.log(uri)
+
+db = require('monk')(uri)
 collection = db.get('Duties')
 
 function sort(a,b){
@@ -116,6 +121,7 @@ io.on('connection', async function(socket){
 	})
 
 	socket.on('remove request', async function(data){
+		console.log(data)
 		if (data.student && data.date){
 
 			database = await collection.find({}, {projection: {_id: 0}})
