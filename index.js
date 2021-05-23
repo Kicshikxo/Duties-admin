@@ -40,7 +40,7 @@ function sortDates(a,b){
 }
 
 app.get('/', async function(request, response){
-	database = await collection.find({}, {projection: {_id: 0}}).sort((prev, next) => {if (prev.name < next.name) return -1})
+	database = await collection.find({}, {projection: {_id: 0}})
 	response.render(__dirname + "/static/HTML/duties_old.html", {database: database})
 })
 
@@ -49,7 +49,7 @@ app.get('/new', async function(request, response){
 })
 
 async function getDB(){
-	return await collection.find({}, {projection: {_id: 0}}).sort((prev, next) => {if (prev.name < next.name) return -1})
+	return (await collection.find({}, {projection: {_id: 0}})).sort((prev, next) => {if (prev.name < next.name) return -1})
 }
 
 app.post("/add", urlencodedParser, add)
