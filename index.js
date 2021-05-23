@@ -13,7 +13,6 @@ const urlencodedParser = bodyParser.urlencoded({extended: false})
 const cors = require('cors')
 
 app.use(cors())
-
 app.use(compression())
 
 app.use('/styles',express.static(__dirname + '/static/styles'))
