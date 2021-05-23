@@ -40,7 +40,7 @@ function sortDates(a,b){
 }
 
 app.get('/', async function(request, response){
-	database = await collection.find({}, {projection: {_id: 0}})
+	database = await collection.find({}, {projection: {_id: 0}}).sort((prev, next) => {if (prev.name < next.name) return -1})
 	response.render(__dirname + "/static/HTML/duties_old.html", {database: database})
 })
 
@@ -49,7 +49,7 @@ app.get('/new', async function(request, response){
 })
 
 async function getDB(){
-	return await collection.find({}, {projection: {_id: 0}})
+	return await collection.find({}, {projection: {_id: 0}}).sort((prev, next) => {if (prev.name < next.name) return -1})
 }
 
 app.post("/add", urlencodedParser, add)
@@ -79,7 +79,7 @@ io.on('connection', async function(socket){
 
 			if (data.students.length !== 0){
 
-				database = await collection.find({}, {projection: {_id: 0}})
+				database = await getDB()
 
 				let needToUpdate = false
 
@@ -118,7 +118,7 @@ io.on('connection', async function(socket){
 		console.log(data)
 		if (data.student && data.date){
 
-			database = await collection.find({}, {projection: {_id: 0}})
+			database = await getDB()
 
 			let currentStudent
 			for (let student of database){
@@ -151,7 +151,7 @@ io.on('connection', async function(socket){
 })
 
 async function add(request, response) {
-	database = await collection.find({}, { projection: { _id: 0}})
+	database = await getDB()
 	var student1, student2
 	for (i of database){
 		if (i.name == request.body.studentName1)
@@ -172,7 +172,7 @@ async function add(request, response) {
 }
 
 async function remove(request, response) {
-	database = await collection.find({}, { projection: { _id: 0}})
+	database = await getDB()
 	var student
 	for (i of database){
 		if (i.name == request.body.studentName)
