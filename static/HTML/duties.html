@@ -1,89 +1,124 @@
 <!DOCTYPE html>
-<html lang = 'ru'>
+<html lang='ru'>
+
 <head>
-	<meta name = 'viewport' content = 'width = device-width, initial-scale = 1, maximum-scale = 1, minimum-scale = 1, user-scalable = no, minimal-ui, shrink-to-fit=no'>
-	<meta charset = 'UTF-8'>
-	<meta name = 'theme-color' content = '#222831'>
-	<meta name = 'full-screen' content = 'yes'>
-	<meta http-equiv = 'X-UA-Compatible' content = 'ie=edge'>
-	<link rel = 'stylesheet' href = '/styles/bootstrap.min.css'>
-	<link rel = 'stylesheet' href = '/styles/style.css'>
-	<link rel = 'stylesheet' href = '/styles/noty.css'>
-
-	<link rel = 'icon' href = 'styles/img/favicon.png' type = 'image/png'>
- 	<link rel = 'shortcut icon' href = 'styles/img/favicon.png' type = 'image/png'>
- 	<link rel = 'alternate' href = 'styles/img/favicon.png'>
-
-	<title>Дежурства</title>
-
-	<link rel = 'preload' href = '/styles/fonts/CenturyGothic.ttf' as = 'font' crossorigin>
+    <meta name='viewport' content='width = device-width, initial-scale = 1, maximum-scale = 1, minimum-scale = 1, user-scalable = no, minimal-ui, shrink-to-fit=no'>
+    <meta charset='UTF-8'>
+    <meta name='theme-color' content='#222831'>
+    <meta name='full-screen' content='yes'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <link rel='stylesheet' href='/styles/bootstrap.min.css'>
+    <link rel='stylesheet' href='/styles/style.css'>
+    <link rel='stylesheet' href='/styles/noty.css'>
+    <link rel='icon' href='styles/img/favicon.png' type='image/png'>
+    <link rel='shortcut icon' href='styles/img/favicon.png' type='image/png'>
+    <link rel='alternate' href='styles/img/favicon.png'>
+    <title>Дежурства</title>
+    <link rel='preload' href='/styles/fonts/CenturyGothic.ttf' as='font' crossorigin>
 </head>
-<body class = 'bg-second'>
 
-	<!-- <div style = 'position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;pointer-events: none;z-index: 100;'></div> -->
+<body class='bg-second'>
+    <!-- <div style = 'position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;pointer-events: none;z-index: 100;'></div> -->
+    <div id='header' class='d-flex justify-content-between flex-md-row align-items-center p-3 px-md-4 bg-main shadow-sm'>
+        <button id='remove-button' class='header-button'></button>
+        <button id='calendar-button' class='header-button'></button>
+        <!-- <h4 id='header-title' class='mr-md-auto'>Дежурства</h4> -->
+        <button id='profile-button' class='header-button'></button>
+        <button id='reload-button' class='header-button'></button>
+        <button id='add-button' class='header-button'></button>
+    </div>
+    <div class='container-fluid'>
+        <div class='main-table hidden'>
+            <span class="loader"><span class="loader-inner"></span></span>
+            <table class='names-table'>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='1'>Богорадников<br>Денис</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='2'>Бувин<br>Алексей</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='3'>Дрюченко<br>Артём</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='4'>Заживихин<br>Дмитрий</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='5'>Кривдин<br>Сергей</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='6'>Крючкин<br>Данил</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='7'>Кузнецов<br>Валерий</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='8'>Маховицкий<br>Владимир</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='9'>Машнин<br>Владислав</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='10'>Озеров<br>Роман</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='11'>Полыновский<br>Дмитрий</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='12'>Скорятин<br>Игорь</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='13'>Спицын<br>Денис</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='14'>Тярин<br>Богдан</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='15'>Фурсин<br>Владислав</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='16'>Шевченко<br>Богдан</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='17'>Шкиперов<br>Дмитрий</td>
+                </tr>
+                <tr class='student-row'>
+                    <td class='cell student-cell' data-index='18'>Яковлев<br>Сергей</td>
+                </tr>
+            </table>
+            <table class='dates-table'></table>
+        </div>
+    </div>
+    <script src='/socket.io/socket.io.min.js'></script>
+    <script src='/js/jquery-1.8.3.min.js'></script>
+    <script src='/js/noty.min.js'></script>
+    <script src='/js/sweetalert.min.js'></script>
+    <script>
+    const socket = io()
 
-	<div id = 'header' class = 'd-flex justify-content-between flex-md-row align-items-center p-3 px-md-4 bg-main shadow-sm'>
-		<button id = 'remove-button'   class = 'header-button'></button>
-		<button id = 'calendar-button' class = 'header-button'></button>
-		<h4 id = 'header-title'        class = 'mr-md-auto'>Дежурства</h4>
-		<button id = 'reload-button'   class = 'header-button'></button>
-		<button id = 'add-button'      class = 'header-button'></button>
-	</div>
+    let jwt = localStorage.getItem('jwt')
 
-	<div class = 'container-fluid'>
-		<div class = 'main-table hidden'>
-			<span class="loader"><span class="loader-inner"></span></span>
-			<table class = 'names-table'>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '1'>Богорадников<br>Денис</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '2'>Бувин<br>Алексей</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '3'>Дрюченко<br>Артём</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '4'>Заживихин<br>Дмитрий</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '5'>Кривдин<br>Сергей</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '6'>Крючкин<br>Данил</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '7'>Кузнецов<br>Валерий</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '8'>Маховицкий<br>Владимир</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '9'>Машнин<br>Владислав</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '10'>Озеров<br>Роман</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '11'>Полыновский<br>Дмитрий</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '12'>Скорятин<br>Игорь</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '13'>Спицын<br>Денис</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '14'>Тярин<br>Богдан</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '15'>Фурсин<br>Владислав</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '16'>Шевченко<br>Богдан</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '17'>Шкиперов<br>Дмитрий</td></tr>
-				<tr class = 'student-row'><td class = 'cell student-cell' data-index = '18'>Яковлев<br>Сергей</td></tr>
-			</table>
+    let isAuth = false
+    let hasBeenAuthorized = JSON.parse(localStorage.getItem('hasBeenAuthorized'))
 
-			<table class = 'dates-table'></table>
-		</div>
-	</div>
+    query = (query) => document.querySelector(query)
+    queryAll = (query) => document.querySelectorAll(query)
+    String.prototype.reverseDate = function() { return this.split('.').reverse().join('.') }
 
-	<script src = '/socket.io/socket.io.min.js'></script>
-	<script src = '/js/jquery-1.8.3.min.js'></script>
+    let database = []
 
-	<script src = '/js/noty.min.js'></script>
-	<script src = '/js/sweetalert.min.js'></script>
+    function getTodayDate() { return `${String(new Date().getFullYear()).padStart(2,0)}-${String(new Date().getMonth()+1).padStart(2,0)}-${String(new Date().getDate()).padStart(2,0)}` }
 
-	<script>
-		const socket = io()
+    let removeButton = query('#remove-button')
+    let calendarButton = query('#calendar-button')
+    let profileButton = query('#profile-button')
+    let reloadButton = query('#reload-button')
+    let addButton = query('#add-button')
 
-		query = (query) => document.querySelector(query)
-		queryAll = (query) => document.querySelectorAll(query)
-		String.prototype.reverseDate = function(){return this.split('.').reverse().join('.')}
+    let namesTable = document.getElementsByClassName('names-table')[0] //query('.names-table')
+    let datesTable = document.getElementsByClassName('dates-table')[0] //query('.dates-table')
 
-		let database = []
-
-		function getTodayDate(){return `${String(new Date().getFullYear()).padStart(2,0)}-${String(new Date().getMonth()+1).padStart(2,0)}-${String(new Date().getDate()).padStart(2,0)}`}
-
-		let removeButton   = query('#remove-button')
-		let calendarButton = query('#calendar-button')
-		let reloadButton   = query('#reload-button')
-		let addButton      = query('#add-button')
-
-		let namesTable = document.getElementsByClassName('names-table')[0] //query('.names-table')
-		let datesTable = document.getElementsByClassName('dates-table')[0] //query('.dates-table')
-
-		const studentsListTemplate = $(`
+    const studentsListTemplate = $(`
 		<select id = 'students-list-template' class = 'form-select bg-second border-main mb-4'>
 			<option value = ''>Выберите студента</option>
 			<option value = 'Богорадников Денис'>Богорадников Денис</option>
@@ -105,210 +140,352 @@
 			<option value = 'Шкиперов Дмитрий'>Шкиперов Дмитрий</option>
 			<option value = 'Яковлев Сергей'>Яковлев Сергей</option>
 		</select>`)[0]
-		
-		socket.on('server response', function(data){
-			swal({
-				icon: (data.success) ? 'success' : 'error',
-				title: data.title,
-				text: data.text
-			}).then(()=>{
-				addButton.classList.remove('opened')
-				removeButton.classList.remove('opened')
-			})
-		})
 
-		function toggleRemoveMenu(){
-			let content = document.createElement('div')
+    socket.on('server response', function(data) {
+        swal({
+            icon: (data.success) ? 'success' : 'error',
+            title: data.title,
+            text: data.text
+        }).then(() => {
+            addButton.classList.remove('opened')
+            removeButton.classList.remove('opened')
+        })
+    })
 
-			let studentList = studentsListTemplate.cloneNode(true)
-			content.appendChild(studentList)
+    function toggleRemoveMenu() {
+        if (socket.disconnected) return new Noty({ text: 'Нет соединения с сервером', timeout: 250 }).show()
+        if (!isAuth) return new Noty({ text: 'Вы не авторизованы', timeout: 500 }).show()
+        let content = document.createElement('div')
 
-			let datesList = studentsListTemplate.cloneNode(false)
-			content.appendChild(datesList)
+        let studentList = studentsListTemplate.cloneNode(true)
+        content.appendChild(studentList)
 
-			studentList.oninput = function(){
-				for (let student of database){
-					if (student.name === this.value){
-						if (student.dates.length > 0){
-							datesList.innerHTML = `<option value = ''>Выберите дату</option>`
-							for (let date of student.dates){
-								datesList.innerHTML += `<option value = '${date}'>${date}</option>`
-							}
-							return 
-						}
-					}
-				}
-				datesList.innerHTML = ''
-			}
+        let datesList = studentsListTemplate.cloneNode(false)
+        content.appendChild(datesList)
 
-			swal({
-				title: 'Удалить дежурство',
-				content: content,
-				button: {
-					text: 'Удалить',
-					closeModal: false
-				}
-			}).then((click)=>{
-				if (click){
-					socket.emit('remove request', {
-						student: (content.children[0] || {}).value, 
-						date: (content.children[1] || {}).value})
-				}
-				else {
-					removeButton.classList.remove('opened')
-				} 
-			})
+        studentList.oninput = function() {
+            for (let student of database) {
+                if (student.name === this.value) {
+                    if (student.dates.length > 0) {
+                        datesList.innerHTML = `<option value = ''>Выберите дату</option>`
+                        for (let date of student.dates) {
+                            datesList.innerHTML += `<option value = '${date}'>${date}</option>`
+                        }
+                        return
+                    }
+                }
+            }
+            datesList.innerHTML = ''
+        }
 
-			removeButton.classList.add('opened')
-		}
+        swal({
+            title: 'Удалить дежурство',
+            content: content,
+            button: {
+                text: 'Удалить',
+                closeModal: false
+            }
+        }).then((click) => {
+            if (click) {
+                socket.emit('remove request', {
+                    student: (content.children[0] || {}).value,
+                    date: (content.children[1] || {}).value
+                })
+            } else {
+                removeButton.classList.remove('opened')
+            }
+        })
 
-		function toggleAddMenu(){
+        removeButton.classList.add('opened')
+    }
 
-		let content = document.createElement('div')
+    function toggleAddMenu() {
+        if (socket.disconnected) return new Noty({ text: 'Нет соединения с сервером', timeout: 250 }).show()
+        if (!isAuth) return new Noty({ text: 'Вы не авторизованы', timeout: 500 }).show()
+        let content = document.createElement('div')
 
-		content.appendChild(studentsListTemplate.cloneNode(true))
-		content.appendChild(studentsListTemplate.cloneNode(true))
+        content.appendChild(studentsListTemplate.cloneNode(true))
+        content.appendChild(studentsListTemplate.cloneNode(true))
 
-		let dateSelector = document.createElement('input')
+        let dateSelector = document.createElement('input')
 
-		dateSelector.className = 'bg-second border-main'
-		dateSelector.id = 'date-selector'
-		dateSelector.type = 'date'
-		dateSelector.value = getTodayDate()
+        dateSelector.className = 'bg-second border-main'
+        dateSelector.id = 'date-selector'
+        dateSelector.type = 'date'
+        dateSelector.value = getTodayDate()
 
-		content.appendChild(dateSelector)
+        content.appendChild(dateSelector)
 
-		swal({
-			title: 'Добавить дежурство',
-			content: content,
-			button: {
-				text: 'Добавить',
-				closeModal: false
-			}
-		}).then(click=>{
-			if (click){
-				socket.emit('add request', {
-					students: [(content.children[0] || {}).value, (content.children[1] || {}).value],
-					date: (query('#date-selector') || {}).value || getTodayDate()
-				})
-			}
-			else {
-				addButton.classList.remove('opened')
-			}
-		})
+        swal({
+            title: 'Добавить дежурство',
+            content: content,
+            button: {
+                text: 'Добавить',
+                closeModal: false
+            }
+        }).then(click => {
+            if (click) {
+                socket.emit('add request', {
+                    students: [(content.children[0] || {}).value, (content.children[1] || {}).value],
+                    date: (query('#date-selector') || {}).value || getTodayDate()
+                })
+            } else {
+                addButton.classList.remove('opened')
+            }
+        })
 
-		addButton.classList.add('opened')
-	}
+        addButton.classList.add('opened')
+    }
 
-		// swal()
-		// setTimeout(function(){
-		// 	swal.close()
-		// })
+    // swal()
+    // setTimeout(function(){
+    // 	swal.close()
+    // })
 
-		function init(){
+    function inputPin(value) {
+        if (value == -1) {
+            query('#pin-input').value = query('#pin-input').value.slice(0, -1)
+        } else if (query('#pin-input').value.length < 4) {
+            query('#pin-input').value += value
+        }
 
-			removeButton.addEventListener('click', toggleRemoveMenu)
-			addButton.addEventListener('click', toggleAddMenu)
+        query('#pin-input').value = query('#pin-input').value.slice(0, 4)
 
-			calendarButton.addEventListener('click', toggleShowPastDays)
+        if (query('#pin-input').value.length == 4) {
+            query('#pin-button-login').disabled = false
+        } else {
+            query('#pin-button-login').disabled = true
+        }
+    }
 
-			reloadButton.addEventListener('click', () => {
-				window.parent.postMessage('','*')
-				location.reload()
-			})
+    function login() {
+        let pin = query('#pin-input').value.trim().slice(0, 4)
+        socket.emit('login request', { pin })
+    }
 
-			swal.setDefaults({
-				closeOnEsc: false
-			})
+    function logOut(showNoty = false) {
+        isAuth = false
+        hasBeenAuthorized = false
+        database = []
+        localStorage.removeItem('jwt')
+        localStorage.setItem('hasBeenAuthorized', JSON.stringify(false))
+        fillTable(database)
+        if (showNoty) new Noty({ text: 'Вы вышли', timeout: 500 }).show()
 
-			Noty.overrideDefaults({
-				theme: 'bootstrap-v4',
-				layout: 'bottomRight',
-				type: 'dark',
-				timeout: 3000,
-				progressBar: true
-			})
+        $('.loader').fadeIn(500)
+        query('.main-table').classList.add('hidden')
+    }
 
-			socket.on('get db response', function(data){
-				// new Noty({text: 'Загружено'}).show()
-				fillTable(data.db)
-				$('.loader').fadeOut(500)
-				query('.main-table').classList.remove('hidden')
-			})
+    function openProfile() {
+        let content = $(`
+	        <fieldset class = 'mt-4 d-flex flex-column'>
+	            ${ (hasBeenAuthorized && !isAuth) ? 
+	                `<h2>Вы <span class = 'text-warning'>были авторизованы</span></h2>` :
+	                `<h1>Вы ${isAuth ? 
+	                    "<span class = 'text-success'>авторизованы</span>" : 
+	                    "<span class = 'text-danger'>не авторизованы</span>"}
+	                </h1>`
+	            } 
 
-			socket.on('update db', function(data){
-				new Noty({text: 'Обновлено'}).show()
-				fillTable(data.db)
-			})
+	            <div class = 'hr mb-2 mt-2'></div>
+	            
+	            ${(hasBeenAuthorized || isAuth) ? 
+	                "<button type = 'button' class = 'mt-3 pt-2 pb-2 btn btn-danger' onclick = 'logOut(true);swal.close()'>Выйти</button>" :
+	                `
+	                <fieldset class = 'mt-2'>
+	                    <h1>Введите PIN-код</h1>
+	                    <div class = 'd-flex justify-content-center mb-1'>
+	                        <input type = 'text' id = 'pin-input' class = 'form-control' readonly maxlength = '4' pattern = '[0-9]{4}'>
+	                    </div>
 
-			socket.emit('get db request')
-		}
+	                    <div class = 'pin-buttons'>
+	                        <div class = 'pin-buttons-row'>
+	                            <button class = 'pin-button pin-button-1' onclick = "inputPin(1)">1</button>
+	                            <button class = 'pin-button pin-button-2' onclick = "inputPin(2)">2</button>
+	                            <button class = 'pin-button pin-button-3' onclick = "inputPin(3)">3</button>
+	                        </div>
+	                        <div class = 'pin-buttons-row'>
+	                            <button class = 'pin-button pin-button-4' onclick = "inputPin(4)">4</button>
+	                            <button class = 'pin-button pin-button-5' onclick = "inputPin(5)">5</button>
+	                            <button class = 'pin-button pin-button-6' onclick = "inputPin(6)">6</button>
+	                        </div>
+	                        <div class = 'pin-buttons-row'>
+	                            <button class = 'pin-button pin-button-7' onclick = "inputPin(7)">7</button>
+	                            <button class = 'pin-button pin-button-8' onclick = "inputPin(8)">8</button>
+	                            <button class = 'pin-button pin-button-9' onclick = "inputPin(9)">9</button>
+	                        </div>
+	                        <div class = 'pin-buttons-row'>
+	                            <button class = 'pin-button pin-button-delete' onclick = "inputPin(-1)"></button>
+	                            <button class = 'pin-button pin-button-0' onclick = "inputPin(0)">0</button>
+	                            <button class = 'pin-button pin-button-login' id = 'pin-button-login' onclick = 'login()' disabled></button>
+	                        </div>
+	                    </div>
+	                </fieldset>
+	            `}
+	        </fieldset>
+	    `)[0]
 
-		datesTable.onmousedown = function(e){
-			e.preventDefault()
-			let startX = this.scrollLeft + e.pageX
-		    let startY = this.scrollTop  + e.pageY
-		    datesTable.onmousemove = function(e){
-		    	e.preventDefault()
-		    	this.scrollLeft = startX - e.pageX
-		        this.scrollTop  = startY - e.pageY
-		        namesTable.scrollTop = this.scrollTop
-		        return false
-		    }
-		}
 
-		window.onmouseup = function(e){
-			e.preventDefault()
-			datesTable.onmousemove = function(){return}
-		}
 
-		datesTable.onscroll = function(e){
-			e.preventDefault()
-			namesTable.scrollTop = this.scrollTop
-		}
+        let buttons
 
-		studentsIndexes = {
-			'Богорадников Денис': 1,
-			'Бувин Алексей': 2,
-			'Дрюченко Артём': 3,
-			'Заживихин Дмитрий': 4,
-			'Кривдин Сергей': 5,
-			'Крючкин Данил': 6,
-			'Кузнецов Валерий': 7,
-			'Маховицкий Владимир': 8,
-			'Машнин Владислав': 9,
-			'Озеров Роман': 10,
-			'Полыновский Дмитрий': 11,
-			'Скорятин Игорь': 12,
-			'Спицын Денис': 13,
-			'Тярин Богдан': 14,
-			'Фурсин Владислав': 15,
-			'Шевченко Богдан': 16,
-			'Шкиперов Дмитрий': 17,
-			'Яковлев Сергей': 18
-		}
+        if (hasBeenAuthorized || isAuth) {
+            buttons = {
+                close: {
+                    text: 'Закрыть'
+                }
+            }
+        } else {
+            buttons = {
+                cancel: 'Закрыть',
+            }
+        }
 
-		nameOfDaysOfWeek = {
-			0: 'воскресенье',
-			1: 'понедельник',
-			2: 'вторник',
-			3: 'среда',
-			4: 'четверг',
-			5: 'пятница',
-			6: 'суббота'
-		}
+        swal({
+            icon: isAuth ? 'success' : hasBeenAuthorized ? 'warning' : null,
+            content: content,
+            buttons: buttons
+        }).then(click => {
+            if (click) {
+                if (click == 'exit') logOut()
+            }
+        })
+    }
 
-		function fillTable(db){
-			database = db
-			datesTable.innerHTML = `<tr class = 'date-row'></tr>`.repeat(18)
+    function init() {
 
-			for (student of database){
-				if (student.dates.length == 0){
-					query(`.dates-table .date-row:nth-child(${studentsIndexes[student.name]})`).innerHTML += `<td class = 'cell date-cell empty'></td>`
-					// tr[nameToNumber[student.name]].innerHTML += `<td class = 'cell empty'></td>`
-				}
-				else for (date of student.dates){
-					query(`.dates-table .date-row:nth-child(${studentsIndexes[student.name]})`).innerHTML += `
+        removeButton.addEventListener('click', toggleRemoveMenu)
+        addButton.addEventListener('click', toggleAddMenu)
+        profileButton.addEventListener('click', openProfile)
+
+        calendarButton.addEventListener('click', toggleShowPastDays)
+
+        reloadButton.addEventListener('click', () => {
+            window.parent.postMessage('', '*')
+            location.reload()
+        })
+
+        swal.setDefaults({
+            closeOnEsc: false
+        })
+
+        Noty.overrideDefaults({
+            theme: 'bootstrap-v4',
+            layout: 'bottomRight',
+            type: 'dark',
+            timeout: 3000,
+            progressBar: true
+        })
+
+        socket.on('login response', function(data) {
+            if (data.success) {
+                new Noty({ text: 'Аутентификация успешна', timeout: 500 }).show()
+                isAuth = true
+                hasBeenAuthorized = true
+                localStorage.setItem('hasBeenAuthorized', JSON.stringify(true))
+                localStorage.setItem('jwt', data.token)
+                jwt = data.token
+                socket.emit('get db request', { jwt: jwt })
+                swal.close()
+            } else {
+                new Noty({ text: 'Ошибка аутентификации', type: 'error', timeout: 1500 }).show()
+                logOut()
+            }
+        })
+
+        socket.on('connect', function() {
+            new Noty({ text: 'Соединение установлено', timeout: 500 }).show()
+            socket.emit('get db request', { jwt })
+        })
+
+
+        socket.on('disconnect', function() {
+            new Noty({ text: 'Соединение разорвано', timeout: 500 }).show()
+            isAuth = false
+        })
+
+        socket.on('get db response', function(data) {
+            // new Noty({text: 'Загружено'}).show()
+            isAuth = true
+            hasBeenAuthorized = true
+            localStorage.setItem('hasBeenAuthorized', JSON.stringify(true))
+            fillTable(data.db)
+            $('.loader').fadeOut(500)
+            query('.main-table').classList.remove('hidden')
+        })
+
+        socket.on('update db', function(data) {
+            if (!isAuth) return
+            new Noty({ text: 'Обновлено' }).show()
+            fillTable(data.db)
+        })
+    }
+
+    datesTable.onmousedown = function(e) {
+        e.preventDefault()
+        let startX = this.scrollLeft + e.pageX
+        let startY = this.scrollTop + e.pageY
+        datesTable.onmousemove = function(e) {
+            e.preventDefault()
+            this.scrollLeft = startX - e.pageX
+            this.scrollTop = startY - e.pageY
+            namesTable.scrollTop = this.scrollTop
+            return false
+        }
+    }
+
+    window.onmouseup = function(e) {
+        e.preventDefault()
+        datesTable.onmousemove = function() { return }
+    }
+
+    datesTable.onscroll = function(e) {
+        e.preventDefault()
+        namesTable.scrollTop = this.scrollTop
+    }
+
+    studentsIndexes = {
+        'Богорадников Денис': 1,
+        'Бувин Алексей': 2,
+        'Дрюченко Артём': 3,
+        'Заживихин Дмитрий': 4,
+        'Кривдин Сергей': 5,
+        'Крючкин Данил': 6,
+        'Кузнецов Валерий': 7,
+        'Маховицкий Владимир': 8,
+        'Машнин Владислав': 9,
+        'Озеров Роман': 10,
+        'Полыновский Дмитрий': 11,
+        'Скорятин Игорь': 12,
+        'Спицын Денис': 13,
+        'Тярин Богдан': 14,
+        'Фурсин Владислав': 15,
+        'Шевченко Богдан': 16,
+        'Шкиперов Дмитрий': 17,
+        'Яковлев Сергей': 18
+    }
+
+    nameOfDaysOfWeek = {
+        0: 'воскресенье',
+        1: 'понедельник',
+        2: 'вторник',
+        3: 'среда',
+        4: 'четверг',
+        5: 'пятница',
+        6: 'суббота'
+    }
+
+    function fillTable(db) {
+        database = db
+        datesTable.innerHTML = `<tr class = 'date-row'></tr>`.repeat(18)
+
+        for (student of database) {
+            if (student.dates.length == 0) {
+                query(`.dates-table .date-row:nth-child(${studentsIndexes[student.name]})`).innerHTML += `<td class = 'cell date-cell empty'></td>`
+                // tr[nameToNumber[student.name]].innerHTML += `<td class = 'cell empty'></td>`
+            } else
+                for (date of student.dates) {
+                    query(`.dates-table .date-row:nth-child(${studentsIndexes[student.name]})`).innerHTML += `
 						<td class = 'cell date-cell' data-date = '${date}'>
 							<div class = 'inner date'>
 								<div>${date.split('.').slice(0,2).join('.')}</div>
@@ -319,16 +496,16 @@
 								<small>дней назад</small>
 							</div>
 						</td>`
-				}
-			}
-		}
+                }
+        }
+    }
 
-		function toggleShowPastDays(){
-			$('.dates-table .date-cell:not(.empty)').toggleClass('show-past-days')
-		}
+    function toggleShowPastDays() {
+        $('.dates-table .date-cell:not(.empty)').toggleClass('show-past-days')
+    }
 
-		window.onload = init
-	</script>
- 	
+    window.onload = init
+    </script>
 </body>
-</html> 
+
+</html>
