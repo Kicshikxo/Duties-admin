@@ -189,7 +189,8 @@
             if (click) {
                 socket.emit('remove request', {
                     student: (content.children[0] || {}).value,
-                    date: (content.children[1] || {}).value
+                    date: (content.children[1] || {}).value,
+                    jwt: jwt
                 })
             } else {
                 removeButton.classList.remove('opened')
@@ -227,7 +228,8 @@
             if (click) {
                 socket.emit('add request', {
                     students: [(content.children[0] || {}).value, (content.children[1] || {}).value],
-                    date: (query('#date-selector') || {}).value || getTodayDate()
+                    date: (query('#date-selector') || {}).value || getTodayDate(),
+                    jwt: jwt
                 })
             } else {
                 addButton.classList.remove('opened')
