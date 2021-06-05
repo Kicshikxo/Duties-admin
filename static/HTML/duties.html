@@ -352,6 +352,11 @@
         })
     }
 
+    socket.on('connect', function() {
+        new Noty({ text: 'Соединение установлено', timeout: 500 }).show()
+        socket.emit('get db request', { jwt })
+    })
+
     function init() {
 
         removeButton.addEventListener('click', toggleRemoveMenu)
@@ -392,12 +397,6 @@
                 logOut()
             }
         })
-
-        socket.on('connect', function() {
-            new Noty({ text: 'Соединение установлено', timeout: 500 }).show()
-            socket.emit('get db request', { jwt })
-        })
-
 
         socket.on('disconnect', function() {
             new Noty({ text: 'Соединение разорвано', timeout: 500 }).show()
